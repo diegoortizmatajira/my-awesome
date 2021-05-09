@@ -20,7 +20,7 @@ local globalKeys =
   -- Default client focus
   awful.key(
     {modkey},
-    'd',
+    'k',
     function()
       awful.client.focus.byidx(1)
     end,
@@ -28,7 +28,7 @@ local globalKeys =
   ),
   awful.key(
     {modkey},
-    'a',
+    'j',
     function()
       awful.client.focus.byidx(-1)
     end,
@@ -36,68 +36,44 @@ local globalKeys =
   ),
   awful.key(
     {modkey},
-    'r',
+    'g',
     function()
-      awful.spawn('rofi -combi-modi window,drun -show combi -modi combi')
+      awful.spawn('custom-nordvpn-menu')
+    end,
+    {description = 'NordVpn Menu', group = 'awesome'}
+  ),
+  awful.key(
+    {modkey},
+    'p',
+    function()
+      awful.spawn('custom-layout')
     end,
     {description = 'Main menu', group = 'awesome'}
   ),
   awful.key(
-    {altkey},
-    'space',
-    function()
-      awful.spawn('rofi -combi-modi window,drun -show combi -modi combi')
-    end,
-    {description = 'Show main menu', group = 'awesome'}
-  ),
-  awful.key(
-    {modkey, 'Shift'},
-    'r',
-    function()
-      awful.spawn('reboot')
-    end,
-    {description = 'Reboot Computer', group = 'awesome'}
-  ),
-  awful.key(
-    {modkey, 'Shift'},
+    {modkey},
     's',
     function()
-      awful.spawn('shutdown now')
+      awful.spawn('custom-launcher')
     end,
-    {description = 'Shutdown Computer', group = 'awesome'}
+    {description = 'Main menu', group = 'awesome'}
   ),
   awful.key(
-    {modkey, 'Shift'},
-    'l',
+    {modkey},
+    'Delete',
     function()
-      _G.exit_screen_show()
+      awful.spawn('custom-askpoweroptions')
     end,
-    {description = 'Log Out Screen', group = 'awesome'}
+    {description = 'Ask Exit options', group = 'awesome'}
   ),
   awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'jump to urgent client', group = 'client'}),
   awful.key(
     {altkey},
     'Tab',
     function()
-      --awful.client.focus.history.previous()
-      awful.client.focus.byidx(1)
-      if _G.client.focus then
-        _G.client.focus:raise()
-      end
+      awful.spawn('custom-alttab')
     end,
-    {description = 'Switch to next window', group = 'client'}
-  ),
-  awful.key(
-    {altkey, 'Shift'},
-    'Tab',
-    function()
-      --awful.client.focus.history.previous()
-      awful.client.focus.byidx(-1)
-      if _G.client.focus then
-        _G.client.focus:raise()
-      end
-    end,
-    {description = 'Switch to previous window', group = 'client'}
+    {description = 'Switch to other window', group = 'client'}
   ),
   -- Programms
   awful.key(
@@ -109,7 +85,7 @@ local globalKeys =
     {description = 'Lock the screen', group = 'awesome'}
   ),
   awful.key(
-    {modkey},
+    {'Shift'},
     'Print',
     function()
       awful.util.spawn_with_shell(apps.default.delayed_screenshot)
@@ -117,16 +93,16 @@ local globalKeys =
     {description = 'Mark an area and screenshot it 10 seconds later (clipboard)', group = 'screenshots (clipboard)'}
   ),
   awful.key(
-    {modkey},
-    'p',
+    {},
+    'Print',
     function()
       awful.util.spawn_with_shell(apps.default.screenshot)
     end,
     {description = 'Take a screenshot of your active monitor and copy it to clipboard', group = 'screenshots (clipboard)'}
   ),
   awful.key(
-    {altkey, 'Shift'},
-    'p',
+    {modkey, 'Shift'},
+    'Print',
     function()
       awful.util.spawn_with_shell(apps.default.region_screenshot)
     end,
@@ -149,6 +125,14 @@ local globalKeys =
     {description = 'Open a browser', group = 'launcher'}
   ),
   -- Standard program
+  awful.key(
+    {modkey},
+    'Enter',
+    function()
+      awful.spawn(apps.default.terminal)
+    end,
+    {description = 'Open a terminal', group = 'launcher'}
+  ),
   awful.key(
     {modkey},
     'x',
@@ -229,7 +213,7 @@ local globalKeys =
     function()
       awful.layout.inc(1)
     end,
-    {description = 'Select next', group = 'layout'}
+    {description = 'Select next Layout', group = 'layout'}
   ),
   awful.key(
     {modkey, 'Shift'},
@@ -237,7 +221,7 @@ local globalKeys =
     function()
       awful.layout.inc(-1)
     end,
-    {description = 'Select previous', group = 'layout'}
+    {description = 'Select previous Layout', group = 'layout'}
   ),
   awful.key(
     {modkey, 'Control'},
@@ -254,6 +238,14 @@ local globalKeys =
   ),
   -- Dropdown application
   awful.key(
+    {modkey, 'Shift'},
+    'Enter',
+    function()
+      _G.toggle_quake()
+    end,
+    {description = 'dropdown application', group = 'launcher'}
+  ),
+  awful.key(
     {modkey},
     'z',
     function()
@@ -261,27 +253,6 @@ local globalKeys =
     end,
     {description = 'dropdown application', group = 'launcher'}
   ),
-  -- Widgets popups
-  --[[awful.key(
-    {altkey},
-    'h',
-    function()
-      if beautiful.fs then
-        beautiful.fs.show(7)
-      end
-    end,
-    {description = 'Show filesystem', group = 'widgets'}
-  ),
-  awful.key(
-    {altkey},
-    'w',
-    function()
-      if beautiful.weather then
-        beautiful.weather.show(7)
-      end
-    end,
-    {description = 'Show weather', group = 'widgets'}
-  ),--]]
   -- Brightness
   awful.key(
     {},
@@ -326,32 +297,64 @@ local globalKeys =
   ),
   awful.key(
     {},
+    'XF86AudioStop',
+    function()
+      awful.spawn('playerctl stop')
+    end,
+    {description = 'Player Stop', group = 'hotkeys'}
+  ),
+  awful.key(
+    {},
+    'XF86AudioPlay',
+    function()
+      awful.spawn('playerctl play-pause')
+    end,
+    {description = 'Player Play/Pause', group = 'hotkeys'}
+  ),
+  awful.key(
+    {},
+    'XF86AudioPause',
+    function()
+      awful.spawn('playerctl pause')
+    end,
+    {description = 'Player Pause', group = 'hotkeys'}
+  ),
+  awful.key(
+    {},
     'XF86AudioNext',
     function()
-      --
+      awful.spawn('playerctl next')
     end,
-    {description = 'toggle mute', group = 'hotkeys'}
+    {description = 'Player Next', group = 'hotkeys'}
+  ),
+  awful.key(
+    {},
+    'XF86AudioPrev',
+    function()
+      awful.spawn('playerctl prev')
+    end,
+    {description = 'Player Previous', group = 'hotkeys'}
   ),
   awful.key(
     {},
     'XF86PowerDown',
     function()
-      --
+      awful.spawn('custom-askpoweroptions')
     end,
-    {description = 'toggle mute', group = 'hotkeys'}
+    {description = 'Ask Exit options', group = 'hotkeys'}
   ),
   awful.key(
     {},
     'XF86PowerOff',
     function()
-      _G.exit_screen_show()
+      awful.spawn('custom-askpoweroptions')
     end,
-    {description = 'toggle mute', group = 'hotkeys'}
+    {description = 'Ask Exit options', group = 'hotkeys'}
   ),
   -- Screen management
   awful.key(
     {modkey},
-    'o',
+    'l',
     awful.client.movetoscreen,
     {description = 'move window to next screen', group = 'client'}
   ),
@@ -371,38 +374,6 @@ local globalKeys =
     {description = 'Open default program for tag/workspace', group = 'tag'}
   ),
   -- Custom hotkeys
-  -- vfio integration
-  awful.key(
-    {'Control',altkey},
-    'space',
-    function()
-      awful.util.spawn_with_shell('vm-attach attach')
-    end
-  ),
-  -- Lutris hotkey
-  awful.key(
-    {modkey},
-    'g',
-    function()
-      awful.util.spawn_with_shell('lutris')
-    end
-  ),
-  -- System Monitor hotkey
-  awful.key(
-    {modkey},
-    'm',
-    function()
-      awful.util.spawn_with_shell('mate-system-monitor')
-    end
-  ),
-  -- Kill VLC
-  awful.key(
-    {modkey},
-    'v',
-    function()
-      awful.util.spawn_with_shell('killall -9 vlc')
-    end
-  ),
   -- File Manager
   awful.key(
     {modkey},

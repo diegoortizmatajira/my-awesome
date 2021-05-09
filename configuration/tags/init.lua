@@ -16,18 +16,18 @@ local tags = {
     defaultApp = apps.default.editor,
     screen = 1
   },
-  {
-    icon = icons.social,
-    type = 'social',
-    defaultApp = apps.default.social,
-    screen = 1
-  },
-  {
-    icon = icons.game,
-    type = 'game',
-    defaultApp = apps.default.game,
-    screen = 1
-  },
+  -- {
+  --   icon = icons.social,
+  --   type = 'social',
+  --   defaultApp = apps.default.social,
+  --   screen = 1
+  -- },
+  -- {
+  --   icon = icons.game,
+  --   type = 'game',
+  --   defaultApp = apps.default.game,
+  --   screen = 1
+  -- },
   {
     icon = icons.folder,
     type = 'files',

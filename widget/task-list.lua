@@ -41,7 +41,7 @@ local function list_update(w, buttons, label, data, objects)
   w:reset()
   for i, o in ipairs(objects) do
     local cache = data[o]
-    local ib, cb, tb, cbm, bgb, tbm, ibm, tt, l, ll, bg_clickable
+    local ib, cb, tb, bgb, tbm, ibm, tt, l, ll, bg_clickable
     if cache then
       ib = cache.ib
       tb = cache.tb
@@ -63,19 +63,6 @@ local function list_update(w, buttons, label, data, objects)
         )
       )
       cb.shape = gears.shape.circle
-      cbm = wibox.container.margin(cb, dpi(4), dpi(4), dpi(4), dpi(4))
-      cbm:buttons(
-        gears.table.join(
-          awful.button(
-            {},
-            1,
-            nil,
-            function()
-              o.kill(o)
-            end
-          )
-        )
-      )
       bg_clickable = clickable_container()
       bgb = wibox.container.background()
       tbm = wibox.container.margin(tb, dpi(4), dpi(4))
@@ -86,9 +73,8 @@ local function list_update(w, buttons, label, data, objects)
       -- All of this is added in a fixed widget
       l:fill_space(true)
       l:add(ibm)
-      l:add(tbm)
+      -- l:add(tbm)
       ll:add(l)
-      ll:add(cbm)
 
       bg_clickable:set_widget(ll)
       -- And all of this gets a background
@@ -98,10 +84,10 @@ local function list_update(w, buttons, label, data, objects)
 
       -- Tooltip to display whole title, if it was truncated
       tt = awful.tooltip({
-        objects = {tb},
+        objects = {ib},
         mode = 'outside',
         align = 'bottom',
-        delay_show = 1,
+        delay_show = 0,
       })
 
       data[o] = {
