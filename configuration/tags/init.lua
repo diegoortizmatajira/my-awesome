@@ -16,18 +16,18 @@ local tags = {
         defaultApp = apps.default.editor,
         screen = 1
     },
-    -- {
-    --   icon = icons.social,
-    --   type = 'social',
-    --   defaultApp = apps.default.social,
-    --   screen = 1
-    -- },
-    -- {
-    --   icon = icons.game,
-    --   type = 'game',
-    --   defaultApp = apps.default.game,
-    --   screen = 1
-    -- },
+    {
+        icon = icons.social,
+        type = 'social',
+        defaultApp = apps.default.social,
+        screen = 1
+    },
+    {
+        icon = icons.game,
+        type = 'game',
+        defaultApp = apps.default.game,
+        screen = 1
+    },
     {
         icon = icons.folder,
         type = 'files',
@@ -61,7 +61,7 @@ awful.screen.connect_for_each_screen(
                 i,
                 {
                     icon = tag.icon,
-                    icon_only = true,
+                    icon_only = false,
                     layout = awful.layout.suit.tile,
                     gap_single_client = false,
                     gap = 4,
