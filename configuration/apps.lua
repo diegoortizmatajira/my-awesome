@@ -28,9 +28,12 @@ return {
         'nm-applet --indicator', -- wifi
         'pnmixer', -- shows an audiocontrol applet in systray when installed.
         'blueman-applet', -- Bluetooth applet
-        -- '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
+        '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
         'xfce4-power-manager', -- Power manager
         'custom-wallpaper',
+        'clipmenud',
+        '/usr/lib/kdeconnectd',
+        'barrier',
         -- Add applications that need to be killed between reloads
         -- to avoid multipled instances, inside the awspawn script
         '~/.config/awesome/configuration/awspawn' -- Spawn "dirty" apps that can linger between sessions

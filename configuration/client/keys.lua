@@ -2,8 +2,8 @@ local awful = require('awful')
 require('awful.autofocus')
 local modkey = require('configuration.keys.mod').modKey
 local altkey = require('configuration.keys.mod').altKey
-local pageUp = '#112'
-local pageDown = '#117'
+local pageUp = 'Prior'
+local pageDown = 'Next'
 
 local clientKeys =
     awful.util.table.join(

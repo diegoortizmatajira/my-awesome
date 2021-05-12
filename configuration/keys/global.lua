@@ -13,39 +13,55 @@ local apps = require('configuration.apps')
 -- Key bindings
 local globalKeys = awful.util.table.join(
     -- Awesome
-    -- awful.key({}, '#133', function() awful.spawn('custom-launcher') end),
-    awful.key({modkey}, 's', function() awful.spawn('custom-launcher') end, {description = 'Application Launcher', group = 'Awesome'}),
-    awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'Show help', group = 'Awesome'}),
-    awful.key({modkey}, ',', hotkeys_popup.show_help, {description = 'Show help', group = 'Awesome'}),
-    awful.key({modkey, 'Control'}, 'r', _G.awesome.restart, {description = 'reload awesome', group = 'awesome'}),
-    awful.key({modkey, 'Control'}, 'q', _G.awesome.quit, {description = 'quit awesome', group = 'awesome'}),
+    awful.key({modkey, 'Control'}, 'r', _G.awesome.restart, {description = 'Reload Awesome', group = 'Awesome'}),
+    awful.key({modkey, 'Control'}, 'q', _G.awesome.quit, {description = 'Quit Awesome', group = 'Awesome'}),
     -- Hotkeys
+    awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
+    awful.key({modkey}, ',', hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
     awful.key({modkey}, 'a', function() awful.util.spawn_with_shell('ibus emoji') end, {description = 'Emoji Picker', group = 'Hotkeys'}),
     awful.key({modkey}, 'g', function() awful.spawn('custom-nordvpn-menu') end, {description = 'Nordvpn options', group = 'Hotkeys'}),
     awful.key({modkey}, 'p', function() awful.spawn('custom-layout') end, {description = 'Display Layout options', group = 'Hotkeys'}),
     awful.key({modkey}, 'Delete', function() awful.spawn('custom-askpoweroptions') end, {description = 'Shutdown options', group = 'Hotkeys'}),
     awful.key({modkey}, 'l', function() awful.spawn(apps.default.lock) end, {description = 'Lock the screen', group = 'Hotkeys'}),
+    awful.key({modkey}, 'v', function() awful.spawn('custom-clipboard') end, {description = 'Recent clipboard', group = 'Hotkeys'}),
+    awful.key({modkey, 'Shift'}, 'd', function() awful.spawn('custom-wallpaper') end, {description = 'Next wallpaper', group = 'Hotkeys'}),
     -- Window Focus
     awful.key({modkey}, 'Down', function() awful.client.focus.global_bydirection('down') end, {description = 'Focus window below', group = 'Windows'}),
     awful.key({modkey}, 'Up', function() awful.client.focus.global_bydirection('up') end, {description = 'Focus window above', group = 'Windows'}),
     awful.key({modkey}, 'Right', function() awful.client.focus.global_bydirection('right') end, {description = 'Focus window on the right', group = 'Windows'}),
     awful.key({modkey}, 'Left', function() awful.client.focus.global_bydirection('left') end, {description = 'Focus window on the left', group = 'Windows'}),
-    -- Modkey + Shift
-    awful.key({modkey, 'Shift'}, pageDown, awful.tag.viewprev, {description = 'Change to previous workspace', group = 'Workspaces'}),
-    awful.key({modkey, 'Shift'}, pageUp, awful.tag.viewnext, {description = 'Change to next workspace', group = 'Workspaces'}),
-    awful.key({modkey}, 'Escape', awful.tag.history.restore, {description = 'Change to last used workspace', group = 'Workspaces'}),
-    -- Default Window focus
-    awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'jump to urgent client', group = 'Windows'}),
+    awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'Jump to urgent window', group = 'Windows'}),
     awful.key({altkey}, 'Tab', function() awful.spawn('custom-alttab') end, {description = 'Switch to other window', group = 'Windows'}),
-    -- Programs
-    awful.key({modkey}, 'c', function() awful.util.spawn(apps.default.editor) end, {description = 'Open a text/code editor', group = 'Applications'}),
+    -- Navigate workspaces
+    awful.key({modkey}, 'Home', awful.tag.viewprev, {description = 'Go to previous workspace', group = 'Workspaces'}),
+    awful.key({modkey}, 'End', awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
+    awful.key({modkey}, 'Escape', awful.tag.history.restore, {description = 'Go to last used workspace', group = 'Workspaces'}),
+    -- Applications
+    -- awful.key({modkey}, 'Super_L', function() end, function() awful.spawn('custom-launcher') end),
+    awful.key({modkey}, 's', function() awful.spawn('custom-launcher') end, {description = 'Application Launcher', group = 'Applications'}),
+    awful.key({modkey}, 't', function() awful.util.spawn(apps.default.editor) end, {description = 'Open a text editor', group = 'Applications'}),
     awful.key({modkey}, 'b', function() awful.util.spawn(apps.default.browser) end, {description = 'Open a browser', group = 'Applications'}),
+    awful.key({modkey}, 'Return', function() awful.spawn(apps.default.terminal) end, {description = 'Open a terminal', group = 'Applications'}),
+    awful.key({modkey}, 'x', function() awful.spawn(apps.default.terminal) end, {description = 'Open a terminal', group = 'Applications'}),
+    awful.key({modkey}, 'e', function() awful.util.spawn(apps.default.files) end, {description = 'File Explorer', group = 'Applications'}),
+    awful.key({modkey, 'Shift'}, 'Return', function() _G.toggle_quake() end, {description = 'Dropdown Terminal', group = 'Applications'}),
+    awful.key({modkey}, 'z', function() _G.toggle_quake() end, {description = 'Dropdown Terminal', group = 'Applications'}),
+    awful.key({modkey, 'Shift'}, 't',
+        function()
+            awful.spawn(
+                awful.screen.focused().selected_tag.defaultApp,
+                {
+                    tag = _G.mouse.screen.selected_tag,
+                    placement = awful.placement.bottom_right
+                }
+            )
+        end, 
+        {description = 'Open default program for workspace', group = 'Applications'}),
+    -- Screenshots
     awful.key({'Shift'}, 'Print', function() awful.util.spawn_with_shell(apps.default.delayed_screenshot) end, {description = 'Mark an area and screenshot it 10 seconds later (clipboard)', group = 'screenshots (clipboard)'}),
     awful.key({}, 'Print', function() awful.util.spawn_with_shell(apps.default.screenshot) end, {description = 'Take a screenshot of your active monitor and copy it to clipboard', group = 'screenshots (clipboard)'}),
     awful.key({modkey, 'Shift'}, 'Print', function() awful.util.spawn_with_shell(apps.default.region_screenshot) end, {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
     -- Standard program
-    awful.key({modkey}, 'Return', function() awful.spawn(apps.default.terminal) end, {description = 'Open a terminal', group = 'Applications'}),
-    awful.key({modkey}, 'x', function() awful.spawn(apps.default.terminal) end, {description = 'Open a terminal', group = 'Applications'}),
     awful.key({altkey, 'Shift'}, 'Right', function() awful.tag.incmwfact(0.05) end, {description = 'Increase master width factor', group = 'layout'}),
     awful.key({altkey, 'Shift'}, 'Left', function() awful.tag.incmwfact(-0.05) end, {description = 'Decrease master width factor', group = 'layout'}),
     awful.key({altkey, 'Shift'}, 'Down', function() awful.client.incwfact(0.05) end, {description = 'Decrease master height factor', group = 'layout'}),
@@ -67,8 +83,6 @@ local globalKeys = awful.util.table.join(
         end,
         {description = 'Restore minimized', group = 'Windows'}),
     -- Dropdown application
-    awful.key({modkey, 'Shift'}, 'Return', function() _G.toggle_quake() end, {description = 'Dropdown Terminal', group = 'Applications'}),
-    awful.key({modkey}, 'z', function() _G.toggle_quake() end, {description = 'Dropdown Terminal', group = 'Applications'}),
     -- Brightness
     awful.key({}, 'XF86MonBrightnessUp', function() awful.spawn('xbacklight -inc 10') end),
     awful.key({}, 'XF86MonBrightnessDown', function() awful.spawn('xbacklight -dec 10') end),
@@ -82,24 +96,9 @@ local globalKeys = awful.util.table.join(
     awful.key({}, 'XF86AudioNext', function() awful.spawn('playerctl next') end),
     awful.key({}, 'XF86AudioPrev', function() awful.spawn('playerctl prev') end),
     awful.key({}, 'XF86PowerDown', function() awful.spawn('custom-askpoweroptions') end),
-    awful.key({}, 'XF86PowerOff', function() awful.spawn('custom-askpoweroptions') end),
+    awful.key({}, 'XF86PowerOff', function() awful.spawn('custom-askpoweroptions') end)
     -- Screen management
     -- awful.key({modkey}, 'Right', awful.client.movetoscreen, {description = 'move window to next screen', group = 'Windows'}),
-    -- Open default program for tag
-    awful.key({modkey}, 't',
-        function()
-            awful.spawn(
-                awful.screen.focused().selected_tag.defaultApp,
-                {
-                    tag = _G.mouse.screen.selected_tag,
-                    placement = awful.placement.bottom_right
-                }
-            )
-        end, {description = 'Open default program for tag/workspace', group = 'Tag'}
-    ),
-    -- Custom hotkeys
-    -- File Manager
-    awful.key({modkey}, 'e', function() awful.util.spawn(apps.default.files) end, {description = 'File Explorer', group = 'Programs'})
 )
 
 -- Bind all key numbers to tags.
