@@ -122,7 +122,7 @@ local TopPanel = function(s)
         {
             layout = wibox.layout.fixed.horizontal,
             -- Create a taglist widget
-            TagList(s),
+            tagSelector(s),
             TaskList(s),
             add_button
         },
@@ -138,6 +138,17 @@ local TopPanel = function(s)
     }
 
     return panel
+end
+
+function tagSelector(s)
+    -- local l, pre, prem
+    -- l = wibox.layout.fixed.horizontal()
+    -- pre = wibox.widget.textbox()
+    -- prem = wibox.container.margin(tb, dpi(6), dpi(6))
+    -- l.add(pre)
+    -- l.add(TagList(s))
+    -- return l
+    return TagList(s)
 end
 
 return TopPanel
