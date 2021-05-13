@@ -7,6 +7,15 @@ local pageDown = 'Next'
 
 local clientKeys =
     awful.util.table.join(
+        -- awful.key({modkey, 'Ctrl'}, 'Left',
+        --     function (c)
+        --         c.move_to_screen(c.screen.index-1)
+        --     end, {description = 'Move window to previous screen', group = 'Windows'}),
+        -- awful.key({modkey, 'Ctrl'}, 'Right',
+        --     function (c)
+        --         c.move_to_screen(c.screen.index+1)
+        --     end
+        --     , {description = 'Move window to next screen', group = 'Windows'}),
         awful.key({modkey}, 'F11',
             function(c)
                 c.fullscreen = not c.fullscreen
