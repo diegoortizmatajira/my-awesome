@@ -34,15 +34,21 @@ local globalKeys = awful.util.table.join(
     -- Navigate workspaces
     awful.key({modkey, 'Ctrl'}, 'Down', awful.tag.viewprev, {description = 'Go to previous workspace', group = 'Workspaces'}),
     awful.key({modkey, 'Ctrl'}, 'Up', awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
+    -- awful.key({modkey, 'Ctrl'}, 'Right', 
+    --     function()
+    --         local screen = awful.screen.focused()
+    --     end
+    --     , {description = 'Move workspace to screen on the right', group = 'Workspaces'}),
+    -- awful.key({modkey, 'Ctrl'}, 'Left', awful.tag.viewprev, {description = 'Move workspace to screen on the left', group = 'Workspaces'}),
     awful.key({modkey}, 'Escape', awful.tag.history.restore, {description = 'Go to last used workspace', group = 'Workspaces'}),
     -- Applications
     -- awful.key({modkey}, 'Super_L', function() end, function() awful.spawn('custom-launcher') end),
     awful.key({modkey}, 's', function() awful.spawn('custom-launcher') end, {description = 'Application Launcher', group = 'Applications'}),
     awful.key({modkey}, 't', function() awful.util.spawn(apps.default.editor) end, {description = 'Open a text editor', group = 'Applications'}),
-    awful.key({modkey}, 'b', function() awful.util.spawn(apps.default.browser) end, {description = 'Open a browser', group = 'Applications'}),
+    awful.key({modkey}, 'b', function() awful.spawn(apps.default.browser) end, {description = 'Open a browser', group = 'Applications'}),
     awful.key({modkey}, 'Return', function() awful.spawn(apps.default.terminal) end, {description = 'Open a terminal', group = 'Applications'}),
     awful.key({modkey}, 'x', function() awful.spawn(apps.default.terminal) end, {description = 'Open a terminal', group = 'Applications'}),
-    awful.key({modkey}, 'e', function() awful.util.spawn(apps.default.files) end, {description = 'File Explorer', group = 'Applications'}),
+    awful.key({modkey}, 'e', function() awful.spawn(apps.default.files) end, {description = 'File Explorer', group = 'Applications'}),
     awful.key({modkey, 'Shift'}, 'Return', function() _G.toggle_quake() end, {description = 'Dropdown Terminal', group = 'Applications'}),
     awful.key({modkey}, 'z', function() _G.toggle_quake() end, {description = 'Dropdown Terminal', group = 'Applications'}),
     awful.key({modkey, 'Shift'}, 't',

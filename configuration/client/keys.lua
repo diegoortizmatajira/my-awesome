@@ -27,12 +27,12 @@ local clientKeys =
             end,
             {description = 'Close Window', group = 'Windows'}
         ),
-        awful.key({modkey}, 'Prior',
+        awful.key({modkey}, 'Next',
             function(c)
                 c.minimized = true
             end ,
             {description = "Minimize", group = "Windows"}),
-        awful.key({modkey}, 'Next',
+        awful.key({modkey}, 'Prior',
             function(c)
                 c.maximized = not c.maximized
                 c:raise()

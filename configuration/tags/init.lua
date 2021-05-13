@@ -64,21 +64,24 @@ awful.layout.layouts = {
     awful.layout.suit.max,
 }
 
-local taglist = {}
+local taglist
 
-for i, tag in pairs(tags) do
-    table.insert(taglist,
-        awful.tag.add(
-            tag.name,
-            {
-                layout = awful.layout.suit.tile,
-                gap_single_client = false,
-                gap = 4,
-                screen = getDefaultScreen(tag.screen),
-                defaultApp = tag.defaultApp,
-            }
+if taglist == nil or #taglist == 0 then
+    taglist = {}
+    for i, tag in pairs(tags) do
+        table.insert(taglist,
+            awful.tag.add(
+                tag.name,
+                {
+                    layout = awful.layout.suit.tile,
+                    gap_single_client = false,
+                    gap = 4,
+                    screen = getDefaultScreen(tag.screen),
+                    defaultApp = tag.defaultApp,
+                }
+            )
         )
-    )
+    end
 end
 
 
