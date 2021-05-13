@@ -3,76 +3,95 @@ local gears = require('gears')
 local icons = require('theme.icons')
 local apps = require('configuration.apps')
 
+local getDefaultScreen = function (preferredScreen)
+    if screen.count() >=preferredScreen  then
+        return preferredScreen
+    else
+        return 1
+    end
+end
+
 local tags = {
     {
-        icon = icons.chrome,
-        type = 'chrome',
-        defaultApp = apps.default.browser,
-        screen = 1
-    },
-    {
-        icon = icons.code,
-        type = 'code',
-        defaultApp = apps.default.editor,
-        screen = 1
-    },
-    {
-        icon = icons.social,
-        type = 'social',
-        defaultApp = apps.default.social,
-        screen = 1
-    },
-    {
-        icon = icons.game,
-        type = 'game',
-        defaultApp = apps.default.game,
-        screen = 1
-    },
-    {
-        icon = icons.folder,
-        type = 'files',
-        defaultApp = apps.default.files,
-        screen = 1
-    },
-    {
-        icon = icons.music,
-        type = 'music',
-        defaultApp = apps.default.music,
-        screen = 1
-    },
-    {
-        icon = icons.lab,
-        type = 'any',
+        name = 1,
         defaultApp = apps.default.rofi,
         screen = 1
-    }
+    },
+    {
+        name = 2,
+        defaultApp = apps.default.rofi,
+        screen = 2
+    },
+    {
+        name = 3,
+        defaultApp = apps.default.rofi,
+        screen = 3
+    },
+    {
+        name = 4,
+        defaultApp = apps.default.rofi,
+        screen = 1
+    },
+    {
+        name = 5,
+        defaultApp = apps.default.rofi,
+        screen = 1
+    },
+    {
+        name = 6,
+        defaultApp = apps.default.rofi,
+        screen = 1
+    },
+    {
+        name = 7,
+        defaultApp = apps.default.rofi,
+        screen = 1
+    },
+    {
+        name = 8,
+        defaultApp = apps.default.rofi,
+        screen = 1
+    },
+    {
+        name = 9,
+        defaultApp = apps.default.rofi,
+        screen = 1
+    },
 }
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
-    -- awful.layout.suit.floating
 }
+
+local taglist = {}
+
+for i, tag in pairs(tags) do
+    table.insert(taglist,
+        awful.tag.add(
+            tag.name,
+            {
+                layout = awful.layout.suit.tile,
+                gap_single_client = false,
+                gap = 4,
+                screen = getDefaultScreen(tag.screen),
+                defaultApp = tag.defaultApp,
+            }
+        )
+    )
+end
+
 
 awful.screen.connect_for_each_screen(
     function(s)
-        for i, tag in pairs(tags) do
-            awful.tag.add(
-                i,
-                {
-                    icon = tag.icon,
-                    icon_only = false,
-                    layout = awful.layout.suit.tile,
-                    gap_single_client = false,
-                    gap = 4,
-                    screen = s,
-                    defaultApp = tag.defaultApp,
-                    selected = i == 1
-                }
-            )
+        for i, t in ipairs(taglist) do
+            if t.screen.index == s.index then
+                t:view_only()
+            end
         end
     end
 )
+
 
 _G.tag.connect_signal(
     'property::layout',
@@ -85,3 +104,5 @@ _G.tag.connect_signal(
         end
     end
 )
+
+return taglist

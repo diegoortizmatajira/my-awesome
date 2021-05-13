@@ -5,9 +5,8 @@ local hotkeys_popup = require('awful.hotkeys_popup').widget
 
 local modkey = require('configuration.keys.mod').modKey
 local altkey = require('configuration.keys.mod').altKey
-local pageUp = '#112'
-local pageDown = '#117'
 local apps = require('configuration.apps')
+local tags = require('configuration.tags')
 
 
 -- Key bindings
@@ -33,8 +32,8 @@ local globalKeys = awful.util.table.join(
     awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'Jump to urgent window', group = 'Windows'}),
     awful.key({altkey}, 'Tab', function() awful.spawn('custom-alttab') end, {description = 'Switch to other window', group = 'Windows'}),
     -- Navigate workspaces
-    awful.key({modkey}, 'Home', awful.tag.viewprev, {description = 'Go to previous workspace', group = 'Workspaces'}),
-    awful.key({modkey}, 'End', awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
+    awful.key({modkey, 'Ctrl'}, 'Down', awful.tag.viewprev, {description = 'Go to previous workspace', group = 'Workspaces'}),
+    awful.key({modkey, 'Ctrl'}, 'Up', awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
     awful.key({modkey}, 'Escape', awful.tag.history.restore, {description = 'Go to last used workspace', group = 'Workspaces'}),
     -- Applications
     -- awful.key({modkey}, 'Super_L', function() end, function() awful.spawn('custom-launcher') end),
@@ -55,23 +54,25 @@ local globalKeys = awful.util.table.join(
                     placement = awful.placement.bottom_right
                 }
             )
-        end, 
+        end,
         {description = 'Open default program for workspace', group = 'Applications'}),
     -- Screenshots
     awful.key({'Shift'}, 'Print', function() awful.util.spawn_with_shell(apps.default.delayed_screenshot) end, {description = 'Mark an area and screenshot it 10 seconds later (clipboard)', group = 'screenshots (clipboard)'}),
     awful.key({}, 'Print', function() awful.util.spawn_with_shell(apps.default.screenshot) end, {description = 'Take a screenshot of your active monitor and copy it to clipboard', group = 'screenshots (clipboard)'}),
     awful.key({modkey, 'Shift'}, 'Print', function() awful.util.spawn_with_shell(apps.default.region_screenshot) end, {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
-    -- Standard program
-    awful.key({altkey, 'Shift'}, 'Right', function() awful.tag.incmwfact(0.05) end, {description = 'Increase master width factor', group = 'layout'}),
-    awful.key({altkey, 'Shift'}, 'Left', function() awful.tag.incmwfact(-0.05) end, {description = 'Decrease master width factor', group = 'layout'}),
-    awful.key({altkey, 'Shift'}, 'Down', function() awful.client.incwfact(0.05) end, {description = 'Decrease master height factor', group = 'layout'}),
-    awful.key({altkey, 'Shift'}, 'Up', function() awful.client.incwfact(-0.05) end, {description = 'Increase master height factor', group = 'layout'}),
-    awful.key({modkey, 'Shift'}, 'Left', function() awful.tag.incnmaster(1, nil, true) end, {description = 'Increase the number of master clients', group = 'layout'}),
-    awful.key({modkey, 'Shift'}, 'Right', function() awful.tag.incnmaster(-1, nil, true) end, {description = 'Decrease the number of master clients', group = 'layout'}),
-    awful.key({modkey, 'Control'}, 'Left', function() awful.tag.incncol(1, nil, true) end, {description = 'Increase the number of columns', group = 'layout'}),
-    awful.key({modkey, 'Control'}, 'Right', function() awful.tag.incncol(-1, nil, true) end, {description = 'Decrease the number of columns', group = 'layout'}),
-    awful.key({modkey}, 'space', function() awful.layout.inc(1) end, {description = 'Select next Layout', group = 'layout'}),
-    awful.key({modkey, 'Shift'}, 'space', function() awful.layout.inc(-1) end, {description = 'Select previous Layout', group = 'layout'}),
+    -- Layout: Master Size
+    awful.key({altkey, 'Shift'}, 'Right', function() awful.tag.incmwfact(0.05) end, {description = 'Increase master width factor', group = 'Master window size'}),
+    awful.key({altkey, 'Shift'}, 'Left', function() awful.tag.incmwfact(-0.05) end, {description = 'Decrease master width factor', group = 'Master window size'}),
+    awful.key({altkey, 'Shift'}, 'Down', function() awful.client.incwfact(0.05) end, {description = 'Decrease master height factor', group = 'Master window size'}),
+    awful.key({altkey, 'Shift'}, 'Up', function() awful.client.incwfact(-0.05) end, {description = 'Increase master height factor', group = 'Master window size'}),
+    -- Layout: Amounts
+    awful.key({modkey, altkey}, 'Up', function() awful.tag.incnmaster(1, nil, true) end, {description = 'Increase the number of master clients', group = 'Layout Distribution'}),
+    awful.key({modkey, altkey}, 'Down', function() awful.tag.incnmaster(-1, nil, true) end, {description = 'Decrease the number of master clients', group = 'Layout Distribution'}),
+    awful.key({modkey, altkey}, 'Right', function() awful.tag.incncol(1, nil, true) end, {description = 'Increase the number of columns', group = 'Layout Distribution'}),
+    awful.key({modkey, altkey}, 'Left', function() awful.tag.incncol(-1, nil, true) end, {description = 'Decrease the number of columns', group = 'Layout Distribution'}),
+    -- Layout: Select
+    awful.key({modkey}, 'space', function() awful.layout.inc(1) end, {description = 'Select next Layout', group = 'Layout Distribution'}),
+    awful.key({modkey, 'Shift'}, 'space', function() awful.layout.inc(-1) end, {description = 'Select previous Layout', group = 'Layout Distribution'}),
     awful.key({modkey, 'Control'}, 'n',
         function()
             local c = awful.client.restore()
@@ -96,9 +97,31 @@ local globalKeys = awful.util.table.join(
     awful.key({}, 'XF86AudioNext', function() awful.spawn('playerctl next') end),
     awful.key({}, 'XF86AudioPrev', function() awful.spawn('playerctl prev') end),
     awful.key({}, 'XF86PowerDown', function() awful.spawn('custom-askpoweroptions') end),
-    awful.key({}, 'XF86PowerOff', function() awful.spawn('custom-askpoweroptions') end)
+    awful.key({}, 'XF86PowerOff', function() awful.spawn('custom-askpoweroptions') end),
+    awful.key({modkey}, 'n',
+        function()
+            local screen = awful.screen.focused()
+            for i, tag in ipairs(tags) do
+                if #tag:clients() == 0 and #tag.screen.tags > 1 then
+                    awful.tag.setscreen(screen, tag)
+                    tag:view_only()
+                    return
+                end
+            end
+        end, {description = 'Go to new empty workspace', group = 'Workspaces'}),
+    awful.key({modkey, 'Shift'}, 'n',
+        function()
+            local screen = awful.screen.focused()
+            for i, tag in ipairs(tags) do
+                if #tag:clients() == 0 and #tag.screen.tags > 1 then
+                    awful.tag.setscreen(screen, tag)
+                    _G.client.focus:move_to_tag(tag)
+                    tag:view_only()
+                    return
+                end
+            end
+        end, {description = 'Move window to a new empty workspace', group = 'Workspaces'})
     -- Screen management
-    -- awful.key({modkey}, 'Right', awful.client.movetoscreen, {description = 'move window to next screen', group = 'Windows'}),
 )
 
 -- Bind all key numbers to tags.
@@ -108,58 +131,49 @@ for i = 1, 9 do
     -- Hack to only show tags 1 and 9 in the shortcut window (mod+s)
     local descr_view, descr_toggle, descr_move, descr_toggle_focus
     if i == 1 or i == 9 then
-        descr_view = {description = 'view tag #', group = 'Tag'}
-        descr_toggle = {description = 'toggle tag #', group = 'Tag'}
-        descr_move = {description = 'move focused client to tag #', group = 'Tag'}
-        descr_toggle_focus = {description = 'toggle focused client on tag #', group = 'Tag'}
+        descr_view = {description = 'Focus workspace #', group = 'Workspaces'}
+        descr_toggle = {description = 'toggle tag #', group = 'Workspaces'}
+        descr_move = {description = 'Move focused window to workspace #', group = 'Workspaces'}
+        descr_toggle_focus = {description = 'Toggle focused workspace on tag #', group = 'Workspaces'}
     end
     globalKeys =
         awful.util.table.join(
             globalKeys,
             -- View tag only.
-            awful.key(
-                {modkey},
-                '#' .. i + 9,
+            awful.key( {modkey}, '#' .. i + 9,
                 function()
                     local screen = awful.screen.focused()
-                    local tag = screen.tags[i]
+                    local tag = tags[i]
                     if tag then
+                        -- Only moves empty tags when the screen has more tags
+                        if #tag:clients() == 0 and #tag.screen.tags > 1 then
+                            awful.tag.setscreen(screen, tag)
+                        end
                         tag:view_only()
+                        awful.screen.focus(tag.screen)
                     end
-                end,
-                descr_view
-            ),
+                end, descr_view),
             -- Toggle tag display.
-            awful.key(
-                {modkey, 'Control'},
-                '#' .. i + 9,
+            awful.key( {modkey, 'Control'}, '#' .. i + 9,
                 function()
-                    local screen = awful.screen.focused()
-                    local tag = screen.tags[i]
+                    local tag = tags[i]
                     if tag then
                         awful.tag.viewtoggle(tag)
                     end
-                end,
-                descr_toggle
-            ),
+                end, descr_toggle),
             -- Move client to tag.
-            awful.key(
-                {modkey, 'Shift'},
-                '#' .. i + 9,
+            awful.key( {modkey, 'Shift'}, '#' .. i + 9,
                 function()
                     if _G.client.focus then
-                        local tag = _G.client.focus.screen.tags[i]
+                        local tag = tags[i]
                         if tag then
                             _G.client.focus:move_to_tag(tag)
+                            tag:view_only()
                         end
                     end
-                end,
-                descr_move
-            ),
+                end, descr_move),
             -- Toggle tag on focused client.
-            awful.key(
-                {modkey, 'Control', 'Shift'},
-                '#' .. i + 9,
+            awful.key( {modkey, 'Control', 'Shift'}, '#' .. i + 9,
                 function()
                     if _G.client.focus then
                         local tag = _G.client.focus.screen.tags[i]
@@ -167,9 +181,7 @@ for i = 1, 9 do
                             _G.client.focus:toggle_tag(tag)
                         end
                     end
-                end,
-                descr_toggle_focus
-            )
+                end, descr_toggle_focus)
         )
 end
 
