@@ -69,7 +69,7 @@ local taglist = {}
 for i, tag in pairs(tags) do
     table.insert(taglist,
         awful.tag.add(
-            i,
+            tag.name,
             {
                 layout = awful.layout.suit.tile,
                 gap_single_client = false,

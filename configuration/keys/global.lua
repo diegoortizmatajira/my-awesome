@@ -5,8 +5,6 @@ local hotkeys_popup = require('awful.hotkeys_popup').widget
 
 local modkey = require('configuration.keys.mod').modKey
 local altkey = require('configuration.keys.mod').altKey
-local pageUp = '#112'
-local pageDown = '#117'
 local apps = require('configuration.apps')
 local tags = require('configuration.tags')
 

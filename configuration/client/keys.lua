@@ -2,8 +2,6 @@ local awful = require('awful')
 require('awful.autofocus')
 local modkey = require('configuration.keys.mod').modKey
 local altkey = require('configuration.keys.mod').altKey
-local pageUp = 'Prior'
-local pageDown = 'Next'
 
 local clientKeys =
     awful.util.table.join(
@@ -29,12 +27,12 @@ local clientKeys =
             end,
             {description = 'Close Window', group = 'Windows'}
         ),
-        awful.key({modkey}, pageDown,
+        awful.key({modkey}, 'Prior',
             function(c)
                 c.minimized = true
             end ,
             {description = "Minimize", group = "Windows"}),
-        awful.key({modkey}, pageUp,
+        awful.key({modkey}, 'Next',
             function(c)
                 c.maximized = not c.maximized
                 c:raise()
