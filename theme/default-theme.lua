@@ -13,7 +13,7 @@ theme.font = serif_font
 -- Colors Pallets
 
 -- Primary
-theme.primary = mat_colors.deep_orange
+theme.primary = mat_colors.lime
 
 -- Accent
 theme.accent = mat_colors.pink
@@ -76,22 +76,21 @@ local awesome_overrides =
             ',0:0,' ..
             theme.accent.hue_500 ..
             ':0.08,' .. theme.accent.hue_500 .. ':0.08,' .. theme.background.hue_800 .. ':1,' .. theme.background.hue_800
-        theme.taglist_bg_focus =
-            'linear:0,0:' ..
+        theme.taglist_bg_focus = 
+            'linear:0,0:0,' ..
             dpi(40) ..
-            ',0:0,' ..
-            theme.primary.hue_500 ..
-            ':0.08,' .. theme.primary.hue_500 .. ':0.08,' .. theme.background.hue_800 .. ':1,' .. theme.background.hue_800
-
+            ':0,' ..
+            theme.background.hue_600 ..
+            ':0.95,' .. theme.background.hue_800 .. ':0.95,' .. theme.fg_normal .. ':1,' .. theme.fg_normal
         -- Tasklist
 
         theme.tasklist_font = mono_font
         theme.tasklist_bg_normal = theme.background.hue_800
-        theme.tasklist_bg_focus =
+        theme.tasklist_bg_focus = 
             'linear:0,0:0,' ..
             dpi(40) ..
             ':0,' ..
-            theme.background.hue_800 ..
+            theme.background.hue_600 ..
             ':0.95,' .. theme.background.hue_800 .. ':0.95,' .. theme.fg_normal .. ':1,' .. theme.fg_normal
         theme.tasklist_bg_urgent = theme.primary.hue_800
         theme.tasklist_fg_focus = '#DDDDDD'
