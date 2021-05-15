@@ -16,7 +16,7 @@ theme.font = serif_font
 theme.primary = mat_colors.lime
 
 -- Accent
-theme.accent = mat_colors.pink
+theme.accent = mat_colors.orange
 
 -- Background
 theme.background = mat_colors.grey
@@ -70,28 +70,43 @@ local awesome_overrides =
 
         theme.taglist_bg_empty = theme.background.hue_800
         theme.taglist_bg_occupied = theme.background.hue_800
-        theme.taglist_bg_urgent =
-            'linear:0,0:' ..
-            dpi(40) ..
-            ',0:0,' ..
-            theme.accent.hue_500 ..
-            ':0.08,' .. theme.accent.hue_500 .. ':0.08,' .. theme.background.hue_800 .. ':1,' .. theme.background.hue_800
-        theme.taglist_bg_focus = 
-            'linear:0,0:0,' ..
-            dpi(40) ..
-            ':0,' ..
-            theme.background.hue_600 ..
-            ':0.95,' .. theme.background.hue_800 .. ':0.95,' .. theme.fg_normal .. ':1,' .. theme.fg_normal
+        theme.taglist_bg_urgent = {
+            type = 'linear',
+            from = {0, 0},
+            to = {0, dpi(40)},
+            stops = {
+                { 0, theme.accent.hue_800 },
+                { 0.07, theme.accent.hue_800 },
+                { 0.08, theme.background.hue_800 },
+                { 0.95, theme.accent.hue_300 }
+            }
+        } 
+        theme.taglist_bg_focus = {
+            type = 'linear',
+            from = {0, 0},
+            to = {0, dpi(40)},
+            stops = {
+                { 0, theme.accent.hue_800 },
+                { 0.07, theme.accent.hue_800 },
+                { 0.08, theme.background.hue_800 },
+                { 0.95, theme.background.hue_600 }
+            }
+        } 
         -- Tasklist
 
         theme.tasklist_font = mono_font
         theme.tasklist_bg_normal = theme.background.hue_800
-        theme.tasklist_bg_focus = 
-            'linear:0,0:0,' ..
-            dpi(40) ..
-            ':0,' ..
-            theme.background.hue_600 ..
-            ':0.95,' .. theme.background.hue_800 .. ':0.95,' .. theme.fg_normal .. ':1,' .. theme.fg_normal
+        theme.tasklist_bg_focus = {
+            type = 'linear',
+            from = {0, 0},
+            to = {0, dpi(40)},
+            stops = {
+                { 0, theme.primary.hue_800 },
+                { 0.07, theme.primary.hue_800 },
+                { 0.08, theme.background.hue_800 },
+                { 0.95, theme.background.hue_600 }
+            }
+        } 
         theme.tasklist_bg_urgent = theme.primary.hue_800
         theme.tasklist_fg_focus = '#DDDDDD'
         theme.tasklist_fg_urgent = theme.fg_normal
