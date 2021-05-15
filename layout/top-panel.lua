@@ -7,8 +7,10 @@ local gears = require('gears')
 local clickable_container = require('widget.material.clickable-container')
 local mat_icon_button = require('widget.material.icon-button')
 local mat_icon = require('widget.material.icon')
+local mat_colors = require('theme.mat-colors')
 local dpi = require('beautiful').xresources.apply_dpi
 local icons = require('theme.icons')
+local font_icons = require('layout.font-icons')
 
 -- Titus - Horizontal Tray
 local systray = wibox.widget.systray()
@@ -91,6 +93,20 @@ local LayoutBox = function(s)
     return layoutBox
 end
 
+local TagListComponent = function(s)
+    return {
+        {
+            font_icons.make_faicon(font_icons.tag_opening, mat_colors.blue.hue_500),
+            TagList(s, font_icons.make_icon(font_icons.tag_separator, mat_colors.blue.hue_500)),
+            font_icons.make_faicon(font_icons.tag_closing, mat_colors.blue.hue_500),
+            layout = wibox.layout.fixed.horizontal
+        },
+        left  = 2,
+        right = 2,
+        widget = wibox.container.margin
+    }
+end
+
 local TopPanel = function(s)
 
     local panel =
@@ -121,12 +137,13 @@ local TopPanel = function(s)
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,
-            -- Create a taglist widget
-            tagSelector(s),
+            TagListComponent(s),
+        },
+        {
+            layout = wibox.layout.fixed.horizontal,
             TaskList(s),
             add_button
         },
-        nil,
         {
             layout = wibox.layout.fixed.horizontal,
             wibox.container.margin(systray, dpi(3), dpi(3), dpi(6), dpi(3)),
@@ -138,17 +155,6 @@ local TopPanel = function(s)
     }
 
     return panel
-end
-
-function tagSelector(s)
-    -- local l, pre, prem
-    -- l = wibox.layout.fixed.horizontal()
-    -- pre = wibox.widget.textbox()
-    -- prem = wibox.container.margin(tb, dpi(6), dpi(6))
-    -- l.add(pre)
-    -- l.add(TagList(s))
-    -- return l
-    return TagList(s)
 end
 
 return TopPanel
