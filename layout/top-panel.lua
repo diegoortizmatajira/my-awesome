@@ -22,6 +22,7 @@ systray.forced_height = 20
 -- local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 9">%d.%m.%Y\n     %H:%M</span>')
 -- Clock / Calendar 12AM/PM fornat
 local textclock = wibox.widget.textclock('%a %I:%M %p')
+
 -- textclock.forced_height = 36
 
 -- Add a calendar (credits to kylekewley for the original code)
@@ -107,6 +108,31 @@ local TagListComponent = function(s)
     }
 end
 
+local ClockComponent =  {
+    {
+        font_icons.make_faicon(font_icons.icon_clock, mat_colors.pink.hue_500),
+        clock_widget,
+        layout = wibox.layout.fixed.horizontal
+    },
+    left  = 2,
+    right = 2,
+    widget = wibox.container.margin
+}
+
+local TitleComponent = {
+    {
+        font_icons.make_faicon(font_icons.icon_window, mat_colors.hue_green.hue_500),
+        -- { -- Title
+        --     align  = 'center',
+        --     widget = awful.titlebar.widget.titlewidget(c)
+        -- },
+        layout = wibox.layout.fixed.horizontal
+    },
+    left  = 2,
+    right = 2,
+    widget = wibox.container.margin
+}
+
 local TopPanel = function(s)
 
     local panel =
@@ -138,19 +164,17 @@ local TopPanel = function(s)
         {
             layout = wibox.layout.fixed.horizontal,
             TagListComponent(s),
-        },
-        {
-            layout = wibox.layout.fixed.horizontal,
+            -- font_icons.make_faicon(font_icons.icon_arrow_square_right, mat_colors.hue_green.hue_500),
             TaskList(s),
-            add_button
+        },
+        {
+            layout = wibox.layout.align.horizontal,
         },
         {
             layout = wibox.layout.fixed.horizontal,
-            wibox.container.margin(systray, dpi(3), dpi(3), dpi(6), dpi(3)),
-            -- Layout box
             LayoutBox(s),
-            -- Clock
-            clock_widget,
+            ClockComponent,
+            wibox.container.margin(systray, dpi(3), dpi(3), dpi(6), dpi(3)),
         }
     }
 

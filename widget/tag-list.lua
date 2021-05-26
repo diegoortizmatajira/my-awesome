@@ -59,45 +59,6 @@ local TagList = function(s, separator)
             layout = wibox.layout.fixed.horizontal
         },
         style = { },
-        -- widget_template = {
-        --     {
-        --         {
-        --             -- {
-        --             --     {
-        --             --         id     = 'icon_role',
-        --             --         widget = wibox.widget.imagebox,
-        --             --     },
-        --             --     margins = 2,
-        --             --     widget  = wibox.container.margin,
-        --             -- },
-        --             {
-        --                 id     = 'text_role',
-        --                 widget = wibox.widget.textbox,
-        --             },
-        --             layout = wibox.layout.fixed.horizontal,
-        --         },
-        --         left  = 6,
-        --         right = 6,
-        --         widget = wibox.container.margin
-        --     },
-        --     id     = 'background_role',
-        --     widget = wibox.container.background,
-        --     -- Add support for hover colors and an index label
-        --     create_callback = function(self, c3, index, objects) --luacheck: no unused args
-        --         self:connect_signal('mouse::enter', function()
-        --             if self.bg ~= '#ff0000' then
-        --                 self.backup     = self.bg
-        --                 self.has_backup = true
-        --             end
-        --             self.bg = '#ff0000'
-        --         end)
-        --         self:connect_signal('mouse::leave', function()
-        --             if self.has_backup then self.bg = self.backup end
-        --         end)
-        --     end,
-        --     update_callback = function(self, c3, index, objects) --luacheck: no unused args
-        --     end,
-        -- },
     })
 end
 
