@@ -119,6 +119,16 @@ local ClockComponent =  {
     widget = wibox.container.margin
 }
 
+local AudioComponent = {
+    {
+        font_icons.make_faicon(font_icons.sound_on, mat_colors.hue_blue.hue_500),
+        layout = wibox.layout.fixed.horizontal
+    },
+    left  = 2,
+    right = 2,
+    widget = wibox.container.margin
+}
+
 local TitleComponent = {
     {
         font_icons.make_faicon(font_icons.icon_window, mat_colors.hue_green.hue_500),
@@ -173,7 +183,15 @@ local TopPanel = function(s)
         {
             layout = wibox.layout.fixed.horizontal,
             LayoutBox(s),
+
+            font_icons.make_faicon(font_icons.keyboard, mat_colors.teal.hue_500),
+            AudioComponent,
+            font_icons.make_faicon(font_icons.wifi, mat_colors.blue.hue_500),
+            font_icons.make_faicon(font_icons.network, mat_colors.indigo.hue_500),
+            font_icons.make_faicon(font_icons.vpn, mat_colors.hue_purple.hue_500),
+            font_icons.make_faicon(font_icons.battery, mat_colors.purple.hue_500),
             ClockComponent,
+            font_icons.make_faicon(font_icons.power, mat_colors.red.hue_500),
             wibox.container.margin(systray, dpi(3), dpi(3), dpi(6), dpi(3)),
         }
     }

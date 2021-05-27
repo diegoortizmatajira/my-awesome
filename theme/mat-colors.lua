@@ -310,6 +310,18 @@ return {
         hue_800 = '#37474F',
         hue_900 = '#263238'
     },
+    background = {
+        hue_50 = '#ECEFF1',
+        hue_100 = '#CFD8DC',
+        hue_200 = '#B0BEC5',
+        hue_300 = '#90A4AE',
+        hue_400 = '#78909C',
+        hue_500 = '#607D8B',
+        hue_600 = '#546E7A',
+        hue_700 = '#455A64',
+        hue_800 = '#020202',
+        hue_900 = '#263238'
+    },
     -- Black
     black = '#000000',
     -- White
