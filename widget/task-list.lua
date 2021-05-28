@@ -108,6 +108,15 @@ local TaskList = function(s)
             widget = wibox.container.background,
             create_callback = function(self, c, index, objects) --luacheck: no unused args
                 self:get_children_by_id('clienticon')[1].client = c
+                local tooltip = awful.tooltip({
+                    objects = { self },
+                    align = 'bottom',
+                    delay_show = 0.3,
+                    mode = 'outside',
+                    timer_function = function()
+                        return c.name
+                    end,
+                })
             end,
         },
     })
