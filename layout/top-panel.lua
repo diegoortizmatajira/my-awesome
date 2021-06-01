@@ -57,6 +57,7 @@ local TopPanel = function(s)
 
     panel:setup{
         layout = wibox.layout.align.horizontal,
+        -- expand = "none",
         {layout = wibox.layout.fixed.horizontal,
             AppsMenu(s, mat_colors.hue_green.hue_500),
             TagList(s, mat_colors.blue.hue_500),
@@ -75,7 +76,7 @@ local TopPanel = function(s)
             Battery(s, mat_colors.purple),
             Clock(s, mat_colors.pink),
             Power(s, mat_colors.red),
-            Systray(mat_colors.orange),
+            Systray(mat_colors.brown),
         }
     }
 

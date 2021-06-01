@@ -40,10 +40,13 @@ return {
     battery = '\u{f240}',
     power = '\u{f011}',
     search = '\u{f002}',
+    home = '\u{f015}',
+    windows = '\u{f17a}',
     hamburguer = '\u{f0c9}',
     collapse = '\u{f101}',
     expand = '\u{f100}',
     toggle = '\u{f3f2}',
+    terminal = '\u{f120}',
     make_faicon = make_faicon,
     make_icon = make_icon
 }
