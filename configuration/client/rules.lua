@@ -31,7 +31,7 @@ awful.rules.rules = {
     },
     -- Titlebars
     {
-        rule_any = {type = {'dialog'}, class = {'Wicd-client.py', 'calendar.google.com'}},
+        rule_any = {type = {'dialog'}, class = {'Wicd-client.py', 'calendar.google.com'}, role = {'Popup'}},
         properties = {
             placement = awful.placement.centered,
             ontop = true,
@@ -44,5 +44,5 @@ awful.rules.rules = {
             end,
             skip_decoration = true
         }
-    }
+    },
 }
