@@ -7,8 +7,9 @@ local function Vpn(s, color)
         {
             font_icons.make_faicon(font_icons.vpn, color.hue_500, 5),
             {
-                markup = string.format([[<span color='%s'>%s</span>]], color.hue_100, 'Canada'),
-                widget = wibox.widget.textbox,
+                awful.widget.watch([[bash -c "nordvpn status | grep Country | cut -d ' ' -f2- && echo ''"]], 15),
+                fg = color.hue_100,
+                widget = wibox.container.background
             },
             layout = wibox.layout.fixed.horizontal
         },
