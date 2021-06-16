@@ -20,7 +20,6 @@ local mat_icon = require('widget.material.icon')
 local mat_colors = require('theme.mat-colors')
 local dpi = require('beautiful').xresources.apply_dpi
 local icons = require('theme.icons')
-local font_icons = require('layout.font-icons')
 
 local add_button = mat_icon_button(mat_icon(icons.plus, dpi(24)))
 add_button:buttons(gears.table.join(awful.button({}, 1, nil, function()

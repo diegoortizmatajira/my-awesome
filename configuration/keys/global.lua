@@ -66,6 +66,7 @@ local globalKeys = awful.util.table.join(
     awful.key({'Shift'}, 'Print', function() awful.util.spawn_with_shell(apps.default.delayed_screenshot) end, {description = 'Mark an area and screenshot it 10 seconds later (clipboard)', group = 'screenshots (clipboard)'}),
     awful.key({}, 'Print', function() awful.util.spawn_with_shell(apps.default.screenshot) end, {description = 'Take a screenshot of your active monitor and copy it to clipboard', group = 'screenshots (clipboard)'}),
     awful.key({modkey, 'Shift'}, 'Print', function() awful.util.spawn_with_shell(apps.default.region_screenshot) end, {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
+    awful.key({modkey, 'Shift'}, 's', function() awful.util.spawn_with_shell(apps.default.region_screenshot) end, {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
     -- Layout: Master Size
     awful.key({altkey, 'Shift'}, 'Right', function() awful.tag.incmwfact(0.05) end, {description = 'Increase master width factor', group = 'Master window size'}),
     awful.key({altkey, 'Shift'}, 'Left', function() awful.tag.incmwfact(-0.05) end, {description = 'Decrease master width factor', group = 'Master window size'}),

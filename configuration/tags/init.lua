@@ -61,6 +61,8 @@ local tags = {
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.corner.nw,
     awful.layout.suit.max,
 }
 
