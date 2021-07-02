@@ -58,17 +58,12 @@ local globalKeys = awful.util.table.join( -- Awesome
   awful.key({modkey}, 'Return', spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
   awful.key({modkey}, 'x', spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
   awful.key({modkey}, 'e', spawn(apps.default.files), {description = 'File Explorer', group = 'Applications'}),
-  awful.key({modkey, 'Shift'}, 'Return', function()
-    _G.toggle_quake()
-  end, {description = 'Dropdown Terminal', group = 'Applications'}), awful.key({modkey}, 'z', function()
-    _G.toggle_quake()
-  end, {description = 'Dropdown Terminal', group = 'Applications'}),
-  awful.key({modkey, 'Shift'}, 't', spawn(awful.screen.focused().selected_tag.defaultApp, {
-    tag = _G.mouse.screen.selected_tag,
-    placement = awful.placement.bottom_right
-  }), {description = 'Open default program for workspace', group = 'Applications'}), -- Screenshots
+  awful.key({modkey, 'Shift'}, 'Return', _G.toggle_quake, {description = 'Dropdown Terminal', group = 'Applications'}),
+  awful.key({modkey}, 'z', _G.toggle_quake, {description = 'Dropdown Terminal', group = 'Applications'}),
+  awful.key({modkey, 'Shift'}, 't', spawn(awful.screen.focused().selected_tag.defaultApp),
+    {description = 'Open default program for workspace', group = 'Applications'}), -- Screenshots
   awful.key({'Shift'}, 'Print', spawn(apps.default.delayed_screenshot, true), {
-    description = 'Mark an area and screenshot it 10 seconds later (clipboard)',
+    description = 'Take an screenshot of your active monitor 5 seconds later (clipboard)',
     group = 'screenshots (clipboard)'
   }), awful.key({}, 'Print', spawn(apps.default.screenshot, true), {
     description = 'Take a screenshot of your active monitor and copy it to clipboard',
