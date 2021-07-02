@@ -14,9 +14,6 @@ theme.font = 'SF Pro Display 9'
 -- Background
 
 local awesome_overrides = function(theme)
-    --
+  --
 end
-return {
-    theme = theme,
-    awesome_overrides = awesome_overrides
-}
+return {theme = theme, awesome_overrides = awesome_overrides}

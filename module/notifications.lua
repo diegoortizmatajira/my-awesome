@@ -1,5 +1,4 @@
 local naughty = require('naughty')
-local beautiful = require('beautiful')
 local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
 
@@ -21,42 +20,24 @@ naughty.config.defaults.hover_timeout = nil
 
 -- Error handling
 if _G.awesome.startup_errors then
-    naughty.notify(
-        {
-            preset = naughty.config.presets.critical,
-            title = 'Oops, there were errors during startup!',
-            text = _G.awesome.startup_errors
-        }
-    )
+  naughty.notify({
+    preset = naughty.config.presets.critical,
+    title = 'Oops, there were errors during startup!',
+    text = _G.awesome.startup_errors
+  })
 end
 
 do
-    local in_error = false
-    _G.awesome.connect_signal(
-        'debug::error',
-        function(err)
-            if in_error then
-                return
-            end
-            in_error = true
+  local in_error = false
+  _G.awesome.connect_signal('debug::error', function(err)
+    if in_error then return end
+    in_error = true
 
-            naughty.notify(
-                {
-                    preset = naughty.config.presets.critical,
-                    title = 'Oops, an error happened!',
-                    text = tostring(err)
-                }
-            )
-            in_error = false
-        end
-    )
+    naughty.notify({preset = naughty.config.presets.critical, title = 'Oops, an error happened!', text = tostring(err)})
+    in_error = false
+  end)
 end
 
 function log_this(title, txt)
-    naughty.notify(
-        {
-            title = 'log: ' .. title,
-            text = txt
-        }
-    )
+  naughty.notify({title = 'log: ' .. title, text = txt})
 end
