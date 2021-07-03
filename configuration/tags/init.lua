@@ -1,5 +1,6 @@
 local awful = require('awful')
 local apps = require('configuration.apps')
+local icons = require('layout.font-icons')
 
 local getDefaultScreen = function(preferredScreen)
   if screen.count() >= preferredScreen then
@@ -10,7 +11,7 @@ local getDefaultScreen = function(preferredScreen)
 end
 
 local tags = {
-  {name = 1, defaultApp = apps.default.rofi, screen = 1},
+  {name = 1, defaultApp = apps.default.browser, screen = 1},
   {name = 2, defaultApp = apps.default.rofi, screen = 2},
   {name = 3, defaultApp = apps.default.rofi, screen = 3},
   {name = 4, defaultApp = apps.default.rofi, screen = 1},
@@ -19,7 +20,7 @@ local tags = {
   {name = 7, defaultApp = apps.default.rofi, screen = 1},
   {name = 8, defaultApp = apps.default.rofi, screen = 1},
   {name = 9, defaultApp = apps.default.rofi, screen = 1},
-  {name = 0, defaultApp = apps.default.rofi, screen = 1}
+  {name = 0, defaultApp = apps.default.terminal, screen = 1}
 }
 
 awful.layout.layouts = {
@@ -33,7 +34,7 @@ local taglist
 
 if taglist == nil or #taglist == 0 then
   taglist = {}
-  for i, tag in pairs(tags) do
+  for _, tag in pairs(tags) do
     table.insert(taglist, awful.tag.add(tag.name, {
       layout = awful.layout.suit.tile,
       gap_single_client = false,

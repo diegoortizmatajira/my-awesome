@@ -7,6 +7,8 @@ local theme = {}
 local mono_font = 'Jetbrains Mono Bold 9'
 -- local serif_font = 'SF Pro Display 9'
 local serif_font = mono_font
+-- local symbol_font = 'Font Awesome 5 Pro Regular 9'
+local symbol_font = mono_font
 theme.icons = theme_dir .. '/icons/'
 theme.font = serif_font
 
@@ -69,6 +71,7 @@ local awesome_overrides = function(theme)
 
   -- Taglist
 
+  theme.taglist_font = symbol_font
   theme.taglist_bg_empty = theme.background.hue_800
   theme.taglist_bg_occupied = theme.background.hue_800
   theme.taglist_bg_urgent = {

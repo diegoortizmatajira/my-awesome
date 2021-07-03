@@ -47,6 +47,7 @@ return {
     expand = '\u{f100}',
     toggle = '\u{f3f2}',
     terminal = '\u{f120}',
+    browser = '\u{f267}',
     make_faicon = make_faicon,
     make_icon = make_icon
 }
