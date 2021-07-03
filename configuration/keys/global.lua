@@ -73,8 +73,8 @@ local layout_modify_map = {
 
 -- Key bindings
 local globalKeys = awful.util.table.join( -- Awesome
-  awful.key({modkey, 'Control'}, 'r', _G.awesome.restart, {description = 'Reload Awesome', group = 'Awesome'}),
-  awful.key({modkey, 'Control'}, 'q', _G.awesome.quit, {description = 'Quit Awesome', group = 'Awesome'}), -- Hotkeys
+  awful.key({modkey, 'Control'}, 'r', awesome.restart, {description = 'Reload Awesome', group = 'Awesome'}),
+  awful.key({modkey, 'Control'}, 'q', awesome.quit, {description = 'Quit Awesome', group = 'Awesome'}), -- Hotkeys
   awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
   awful.key({modkey}, ',', hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
   awful.key({modkey}, 'a', spawn('ibus emoji', true), {description = 'Emoji Picker', group = 'Hotkeys'}),
@@ -132,7 +132,7 @@ local globalKeys = awful.util.table.join( -- Awesome
     local c = awful.client.restore()
     -- Focus restored client
     if c then
-      _G.client.focus = c
+      client.focus = c
       c:raise()
     end
   end, {description = 'Restore minimized', group = 'Windows'}), -- Dropdown application
@@ -159,9 +159,9 @@ local globalKeys = awful.util.table.join( -- Awesome
   end, {description = 'Go to new empty workspace', group = 'Workspaces'}), awful.key({modkey, 'Shift'}, 'n', function()
     local screen = awful.screen.focused()
     for _, tag in ipairs(tags) do
-      if _G.client.focus and #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then
+      if client.focus and #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then
         awful.tag.setscreen(screen, tag)
-        _G.client.focus:move_to_tag(tag)
+        client.focus:move_to_tag(tag)
         tag:view_only()
         return
       end
@@ -196,10 +196,10 @@ for i = 1, 10 do
     if tag then awful.tag.viewtoggle(tag) end
   end, descr_toggle), -- Move client to tag.
   awful.key({modkey, 'Shift'}, '#' .. i + 9, function()
-    if _G.client.focus then
+    if client.focus then
       local tag = tags[i]
       if tag then
-        _G.client.focus:move_to_tag(tag)
+        client.focus:move_to_tag(tag)
         tag:view_only()
       end
     end
