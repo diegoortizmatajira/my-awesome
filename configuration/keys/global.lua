@@ -1,4 +1,7 @@
 local awful = require('awful')
+local modalbind = require("configuration.keys.modal-binding")
+modalbind.init()
+
 require('awful.autofocus')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 
@@ -18,8 +21,55 @@ local function spawn(app, with_shell)
 end
 
 local function focus_client(direction)
-  awful.client.focus.global_bydirection(direction)
+  return function()
+    awful.client.focus.global_bydirection(direction)
+  end
 end
+
+local layout_modify_map = {
+  {
+    "h",
+    function()
+      awful.tag.incmwfact(-0.05)
+    end,
+    "Decrease Master Size"
+  },
+  {
+    "l",
+    function()
+      awful.tag.incmwfact(0.05)
+    end,
+    "Increase Master Size"
+  },
+  {
+    "j",
+    function()
+      awful.tag.incnmaster(-1, nil, true)
+    end,
+    "Decrease Master Count"
+  },
+  {
+    "k",
+    function()
+      awful.tag.incnmaster(1, nil, true)
+    end,
+    "Increase Master Count"
+  },
+  {
+    "u",
+    function()
+      awful.tag.incncol(-1, nil, true)
+    end,
+    "Decrease Column Count"
+  },
+  {
+    "i",
+    function()
+      awful.tag.incncol(1, nil, true)
+    end,
+    "Increase Column Count"
+  }
+}
 
 -- Key bindings
 local globalKeys = awful.util.table.join( -- Awesome
@@ -31,36 +81,33 @@ local globalKeys = awful.util.table.join( -- Awesome
   awful.key({modkey}, 'g', spawn('custom-nordvpn-menu'), {description = 'Nordvpn options', group = 'Hotkeys'}),
   awful.key({modkey}, 'p', spawn('custom-layout'), {description = 'Display Layout options', group = 'Hotkeys'}),
   awful.key({modkey}, 'Delete', spawn('custom-askpoweroptions'), {description = 'Shutdown options', group = 'Hotkeys'}),
-  awful.key({modkey}, 'l', spawn(apps.default.lock), {description = 'Lock the screen', group = 'Hotkeys'}),
+  awful.key({modkey, 'Shift'}, 'l', spawn(apps.default.lock), {description = 'Lock the screen', group = 'Hotkeys'}),
   awful.key({modkey}, 'v', spawn('custom-clipboard'), {description = 'Recent clipboard', group = 'Hotkeys'}),
   awful.key({modkey, 'Shift'}, 'd', spawn('custom-wallpaper'), {description = 'Next wallpaper', group = 'Hotkeys'}), -- Window Focus
+  awful.key({modkey}, 'j', focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
+  awful.key({modkey}, 'k', focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
+  awful.key({modkey}, 'l', focus_client('right'), {description = 'Focus window on the right', group = 'Windows'}),
+  awful.key({modkey}, 'h', focus_client('left'), {description = 'Focus window on the left', group = 'Windows'}),
   awful.key({modkey}, 'Down', focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
   awful.key({modkey}, 'Up', focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
   awful.key({modkey}, 'Right', focus_client('right'), {description = 'Focus window on the right', group = 'Windows'}),
   awful.key({modkey}, 'Left', focus_client('left'), {description = 'Focus window on the left', group = 'Windows'}),
   awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'Jump to urgent window', group = 'Windows'}),
   awful.key({altkey}, 'Tab', spawn('custom-alttab'), {description = 'Switch to other window', group = 'Windows'}), -- Navigate workspaces
+  awful.key({modkey, 'Control'}, 'j', awful.tag.viewprev,
+    {description = 'Go to previous workspace', group = 'Workspaces'}), awful.key({modkey, 'Control'}, 'k',
+    awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
   awful.key({modkey, 'Control'}, 'Down', awful.tag.viewprev,
     {description = 'Go to previous workspace', group = 'Workspaces'}), awful.key({modkey, 'Control'}, 'Up',
-    awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
-  -- awful.key({modkey, 'Ctrl'}, 'Right',
-  --     function()
-  --         local screen = awful.screen.focused()
-  --     end
-  --     , {description = 'Move workspace to screen on the right', group = 'Workspaces'}),
-  -- awful.key({modkey, 'Ctrl'}, 'Left', awful.tag.viewprev, {description = 'Move workspace to screen on the left', group = 'Workspaces'}),
-  awful.key({modkey}, 'Escape', awful.tag.history.restore,
-    {description = 'Go to last used workspace', group = 'Workspaces'}), -- Applications
-  -- awful.key({modkey}, 'Super_L', function() , function() awful.spawn('custom-launcher') end),
+    awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}), awful.key({modkey}, 'Tab',
+    awful.tag.history.restore, {description = 'Go to last used workspace', group = 'Workspaces'}), -- Applications
   awful.key({modkey}, 's', spawn('custom-launcher'), {description = 'Application Launcher', group = 'Applications'}),
   awful.key({modkey}, 't', spawn(apps.default.editor), {description = 'Open a text editor', group = 'Applications'}),
   awful.key({modkey}, 'b', spawn(apps.default.browser), {description = 'Open a browser', group = 'Applications'}),
-  awful.key({modkey}, 'Return', spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
   awful.key({modkey}, 'x', spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
   awful.key({modkey}, 'e', spawn(apps.default.files), {description = 'File Explorer', group = 'Applications'}),
-  awful.key({modkey, 'Shift'}, 'Return', _G.toggle_quake, {description = 'Dropdown Terminal', group = 'Applications'}),
   awful.key({modkey}, 'z', _G.toggle_quake, {description = 'Dropdown Terminal', group = 'Applications'}),
-  awful.key({modkey, 'Shift'}, 't', spawn(awful.screen.focused().selected_tag.defaultApp),
+  awful.key({modkey}, 'Return', spawn(awful.screen.focused().selected_tag.defaultApp),
     {description = 'Open default program for workspace', group = 'Applications'}), -- Screenshots
   awful.key({'Shift'}, 'Print', spawn(apps.default.delayed_screenshot, true), {
     description = 'Take an screenshot of your active monitor 5 seconds later (clipboard)',
@@ -73,37 +120,15 @@ local globalKeys = awful.util.table.join( -- Awesome
   awful.key({modkey, 'Shift'}, 's', spawn(apps.default.region_screenshot, true),
     {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
   -- Layout: Master Size
-  awful.key({altkey, 'Shift'}, 'Right', function()
-    awful.tag.incmwfact(0.05)
-  end, {description = 'Increase master width factor', group = 'Master window size'}),
-  awful.key({altkey, 'Shift'}, 'Left', function()
-    awful.tag.incmwfact(-0.05)
-  end, {description = 'Decrease master width factor', group = 'Master window size'}),
-  awful.key({altkey, 'Shift'}, 'Down', function()
-    awful.client.incwfact(0.05)
-  end, {description = 'Decrease master height factor', group = 'Master window size'}),
-  awful.key({altkey, 'Shift'}, 'Up', function()
-    awful.client.incwfact(-0.05)
-  end, {description = 'Increase master height factor', group = 'Master window size'}), -- Layout: Amounts
-  awful.key({modkey, altkey}, 'Up', function()
-    awful.tag.incnmaster(1, nil, true)
-  end, {description = 'Increase the number of master clients', group = 'Layout Distribution'}),
-  awful.key({modkey, altkey}, 'Down', function()
-    awful.tag.incnmaster(-1, nil, true)
-  end, {description = 'Decrease the number of master clients', group = 'Layout Distribution'}),
-  awful.key({modkey, altkey}, 'Right', function()
-    awful.tag.incncol(1, nil, true)
-  end, {description = 'Increase the number of columns', group = 'Layout Distribution'}),
-  awful.key({modkey, altkey}, 'Left', function()
-    awful.tag.incncol(-1, nil, true)
-  end, {description = 'Decrease the number of columns', group = 'Layout Distribution'}), -- Layout: Select
-  awful.key({modkey}, 'space', function()
+  awful.key({modkey}, 'r', function()
+    modalbind.grab({keymap = layout_modify_map, name = 'Modify layout', stay_in_mode = true})
+  end, {description = 'Resizes the current layout', group = 'Modes'}), awful.key({modkey}, 'space', function()
     awful.layout.inc(1)
   end, {description = 'Select next Layout', group = 'Layout Distribution'}),
   awful.key({modkey, 'Shift'}, 'space', function()
     awful.layout.inc(-1)
   end, {description = 'Select previous Layout', group = 'Layout Distribution'}),
-  awful.key({modkey, 'Control'}, 'n', function()
+  awful.key({modkey, 'Shift'}, 'Next', function()
     local c = awful.client.restore()
     -- Focus restored client
     if c then
