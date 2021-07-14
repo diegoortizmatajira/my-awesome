@@ -26,6 +26,16 @@ local function focus_client(direction)
   end
 end
 
+local function toggle_minimize_all(minimized)
+  return function()
+    for _, c in ipairs(mouse.screen.selected_tag:clients()) do c.minimized = minimized end
+  end
+end
+
+local function toggle_show_desktop()
+  for _, c in ipairs(mouse.screen.selected_tag:clients()) do c.minimized = true end
+end
+
 local layout_modify_map = {
   {
     "h",
@@ -83,6 +93,9 @@ local globalKeys = awful.util.table.join( -- Awesome
   awful.key({modkey}, 'Delete', spawn('custom-askpoweroptions'), {description = 'Shutdown options', group = 'Hotkeys'}),
   awful.key({modkey, 'Shift'}, 'l', spawn(apps.default.lock), {description = 'Lock the screen', group = 'Hotkeys'}),
   awful.key({modkey}, 'v', spawn('custom-clipboard'), {description = 'Recent clipboard', group = 'Hotkeys'}),
+  awful.key({modkey}, 'm', toggle_minimize_all(true), {description = 'Minimize all windows', group = 'Hotkeys'}),
+  awful.key({modkey, 'Shift'}, 'm', toggle_minimize_all(false), {description = 'Restore all windows', group = 'Hotkeys'}),
+  awful.key({modkey}, 'd', toggle_show_desktop, {description = 'Show desktop', group = 'Hotkeys'}),
   awful.key({modkey, 'Shift'}, 'd', spawn('custom-wallpaper'), {description = 'Next wallpaper', group = 'Hotkeys'}), -- Window Focus
   awful.key({modkey}, 'j', focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
   awful.key({modkey}, 'k', focus_client('up'), {description = 'Focus window above', group = 'Windows'}),

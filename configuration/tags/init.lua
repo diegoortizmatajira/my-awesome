@@ -34,7 +34,7 @@ local taglist
 
 if taglist == nil or #taglist == 0 then
   taglist = {}
-  for _, tag in pairs(tags) do
+  for _, tag in ipairs(tags) do
     table.insert(taglist, awful.tag.add(tag.name, {
       layout = awful.layout.suit.tile,
       gap_single_client = false,
