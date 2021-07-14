@@ -6,7 +6,7 @@ local font_icons = require('layout.font-icons')
 local TagList = function(s, color)
   return {
     {
-      font_icons.make_faicon(font_icons.tag_opening, color),
+      font_icons.make_faicon(font_icons.tag_opening, color.hue_500),
       awful.widget.taglist({
         screen = s,
         filter = awful.widget.taglist.filter.noempty,
@@ -26,12 +26,12 @@ local TagList = function(s, color)
         end)),
         layout = {
           spacing = 10,
-          spacing_widget = font_icons.make_icon(font_icons.tag_separator, color),
+          spacing_widget = font_icons.make_icon(font_icons.tag_separator, color.hue_900),
           layout = wibox.layout.fixed.horizontal
         },
         style = {}
       }),
-      font_icons.make_faicon(font_icons.tag_closing, color),
+      font_icons.make_faicon(font_icons.tag_closing, color.hue_500),
       layout = wibox.layout.fixed.horizontal
     },
     left = 2,

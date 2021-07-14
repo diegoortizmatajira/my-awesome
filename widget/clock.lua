@@ -1,14 +1,13 @@
 local font_icons = require('layout.font-icons')
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local dpi = require('beautiful').xresources.apply_dpi
-local awful = require('awful')
 local wibox = require('wibox')
 
 local function Clock(s, color)
   -- Clock / Calendar 12AM/PM fornat
   local textclock = wibox.widget.textclock(string.format([[<span color='%s'>%s</span>]], color.hue_100, '%a %I:%M %p'))
 
-  -- Add a calendar (credits to kylekewley for the original code)
-  local month_calendar = awful.widget.calendar_popup.month({screen = s, start_sunday = false, week_numbers = true})
+  local cw = calendar_widget({theme = 'nord', placement = 'top_right', radius = 8})
 
   local clock_widget = wibox.widget{
     {
@@ -20,8 +19,9 @@ local function Clock(s, color)
     right = 5,
     widget = wibox.container.margin
   }
-
-  month_calendar:attach(clock_widget)
+  textclock:connect_signal("button::press", function(_, _, _, button)
+    if button == 1 then cw.toggle() end
+  end)
 
   return clock_widget
 end

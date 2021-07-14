@@ -1,9 +1,12 @@
-local font_icons = require('layout.font-icons')
 local wibox = require('wibox')
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 local function Audio(s, color)
   return {
-    {font_icons.make_faicon(font_icons.sound_on, color.hue_500), layout = wibox.layout.fixed.horizontal},
+    {
+      volume_widget{widget_type = 'arc', main_color = color.hue_500, bg_color = color.hue_900, mute_color = color.hue_50},
+      layout = wibox.layout.fixed.horizontal
+    },
     left = 5,
     right = 5,
     widget = wibox.container.margin
