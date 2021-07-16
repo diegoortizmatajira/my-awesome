@@ -28,6 +28,7 @@ return {
     'clipmenud',
     '/usr/lib/kdeconnectd',
     'barrier',
+    [[xcape -e 'Super_L=Super_L|Control_L|Escape']],
     -- Add applications that need to be killed between reloads
     -- to avoid multipled instances, inside the awspawn script
     '~/.config/awesome/configuration/awspawn' -- Spawn "dirty" apps that can linger between sessions

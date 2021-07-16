@@ -115,6 +115,7 @@ local globalKeys = awful.util.table.join( -- Awesome
     awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}), awful.key({modkey}, 'Tab',
     awful.tag.history.restore, {description = 'Go to last used workspace', group = 'Workspaces'}), -- Applications
   awful.key({modkey}, 's', spawn('custom-launcher'), {description = 'Application Launcher', group = 'Applications'}),
+  awful.key({modkey, 'Control'}, 'Escape', spawn('custom-launcher'), {description = 'Application Launcher', group = 'Applications'}),
   awful.key({modkey}, 't', spawn(apps.default.editor), {description = 'Open a text editor', group = 'Applications'}),
   awful.key({modkey}, 'b', spawn(apps.default.browser), {description = 'Open a browser', group = 'Applications'}),
   awful.key({modkey}, 'x', spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
