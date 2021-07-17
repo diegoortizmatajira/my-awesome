@@ -1,6 +1,5 @@
 local awful = require('awful')
 local wibox = require('wibox')
-local beautiful = require('beautiful')
 local font_icons = require('widget.font-icons')
 local dpi = require('beautiful').xresources.apply_dpi
 
@@ -30,9 +29,6 @@ local function Systray(s, color)
   end)
 
   awesome.connect_signal('widget::systray:toggle', function()
-    -- if screen.primary.systray then
-    --   screen.primary.systray.visible = not screen.primary.systray.visible
-    --   if screen.primary.systray.visible then
     tray_container.visible = not tray_container.visible
     if tray_container.visible then
       toggler_widget.change_icon(font_icons.collapse)
