@@ -22,6 +22,8 @@ theme.accent = mat_colors.orange
 
 -- Background
 theme.background = mat_colors.background
+theme.panel_background = theme.background.hue_800 .. '88'
+local transparent = '#00000000'
 
 local awesome_overrides = function(theme)
   theme.dir = os.getenv('HOME') .. '/.config/awesome/theme'
@@ -36,10 +38,10 @@ local awesome_overrides = function(theme)
   theme.fg_urgent = '#CC9393'
   theme.bat_fg_critical = '#232323'
 
-  theme.bg_normal = theme.background.hue_800
+  theme.bg_normal = theme.panel_background
   theme.bg_focus = '#5a5a5a'
   theme.bg_urgent = '#3F3F3F'
-  theme.bg_systray = theme.background.hue_800
+  theme.bg_systray = theme.panel_background
 
   -- Borders
 
@@ -72,8 +74,8 @@ local awesome_overrides = function(theme)
   -- Taglist
 
   theme.taglist_font = symbol_font
-  theme.taglist_bg_empty = theme.background.hue_800
-  theme.taglist_bg_occupied = theme.background.hue_800
+  theme.taglist_bg_empty = transparent
+  theme.taglist_bg_occupied = transparent
   theme.taglist_bg_urgent = {
     type = 'linear',
     from = {0, 0},
@@ -81,7 +83,7 @@ local awesome_overrides = function(theme)
     stops = {
       {0, theme.accent.hue_800},
       {0.07, theme.accent.hue_800},
-      {0.08, theme.background.hue_800},
+      {0.08, transparent},
       {0.95, theme.accent.hue_300}
     }
   }
@@ -92,14 +94,14 @@ local awesome_overrides = function(theme)
     stops = {
       {0, theme.accent.hue_800},
       {0.07, theme.accent.hue_800},
-      {0.08, theme.background.hue_800},
+      {0.08, transparent},
       {0.95, theme.background.hue_600}
     }
   }
   -- Tasklist
 
   theme.tasklist_font = mono_font
-  theme.tasklist_bg_normal = theme.background.hue_800
+  theme.tasklist_bg_normal = transparent
   theme.tasklist_bg_focus = {
     type = 'linear',
     from = {0, 0},
@@ -107,7 +109,7 @@ local awesome_overrides = function(theme)
     stops = {
       {0, theme.primary.hue_800},
       {0.07, theme.primary.hue_800},
-      {0.08, theme.background.hue_800},
+      {0.08, transparent},
       {0.95, theme.background.hue_600}
     }
   }
