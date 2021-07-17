@@ -1,20 +1,27 @@
 local wibox = require('wibox')
 local icon_font = 'Font Awesome 5 Pro Regular 12'
 
+local function complete_widget(widget, icon_widget, margin)
+  if margin == nil then margin = 3 end
+  local result = wibox.widget{widget, left = margin, right = margin, widget = wibox.container.margin}
+  result.change_icon = function(new_code)
+    icon_widget.markup = string.format([[<span color='%s'>%s</span>]], color, new_code)
+  end
+  return result
+end
+
 local make_icon = function(code, color)
-  return wibox.widget{
-    {
-      markup = string.format([[<span color='%s'>%s</span>]], color, code),
-      align = 'center',
-      valign = 'center',
-      widget = wibox.widget.textbox
-    },
-    widget = wibox.container.background
+  local icon_widget = wibox.widget{
+    markup = string.format([[<span color='%s'>%s</span>]], color, code),
+    align = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
   }
+  local widget = wibox.widget{icon_widget, widget = wibox.container.background}
+  return complete_widget(widget, icon_widget)
 end
 
 local make_faicon = function(code, color, margin)
-  if margin == nil then margin = 3 end
   local icon_widget = wibox.widget{
     markup = string.format([[<span color='%s'>%s</span>]], color, code),
     align = 'center',
@@ -22,11 +29,7 @@ local make_faicon = function(code, color, margin)
     widget = wibox.widget.textbox,
     font = icon_font
   }
-  local result = wibox.widget{icon_widget, left = margin, right = margin, widget = wibox.container.margin}
-  result.change_icon = function(new_code)
-    icon_widget.markup = string.format([[<span color='%s'>%s</span>]], color, new_code)
-  end
-  return result
+  return complete_widget(icon_widget, icon_widget, margin)
 end
 
 return {
