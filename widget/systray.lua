@@ -1,5 +1,6 @@
 local awful = require('awful')
 local wibox = require('wibox')
+local beautiful = require('beautiful')
 local font_icons = require('widget.font-icons')
 local dpi = require('beautiful').xresources.apply_dpi
 
@@ -20,6 +21,7 @@ local function Systray(s, color)
       widget = wibox.container.margin
     },
     visible = false,
+    bg = beautiful.bg_systray,
     widget = wibox.container.background
   }
 
