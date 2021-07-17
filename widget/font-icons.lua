@@ -1,7 +1,7 @@
 local wibox = require('wibox')
 local icon_font = 'Font Awesome 5 Pro Regular 12'
 
-local function complete_widget(widget, icon_widget, margin)
+local function complete_widget(widget, icon_widget, color, margin)
   if margin == nil then margin = 3 end
   local result = wibox.widget{widget, left = margin, right = margin, widget = wibox.container.margin}
   result.change_icon = function(new_code)
@@ -18,7 +18,7 @@ local make_icon = function(code, color)
     widget = wibox.widget.textbox
   }
   local widget = wibox.widget{icon_widget, widget = wibox.container.background}
-  return complete_widget(widget, icon_widget)
+  return complete_widget(widget, icon_widget, color)
 end
 
 local make_faicon = function(code, color, margin)
@@ -29,7 +29,7 @@ local make_faicon = function(code, color, margin)
     widget = wibox.widget.textbox,
     font = icon_font
   }
-  return complete_widget(icon_widget, icon_widget, margin)
+  return complete_widget(icon_widget, icon_widget, color, margin)
 end
 
 return {
@@ -46,6 +46,7 @@ return {
   keyboard = '\u{f11c}',
   vpn = '\u{f57d}',
   battery = '\u{f240}',
+  bluetooth = '\u{f294}',
   power = '\u{f011}',
   search = '\u{f002}',
   home = '\u{f015}',

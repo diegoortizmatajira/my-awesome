@@ -11,23 +11,15 @@ local Wifi = require('widget.wifi')
 local Network = require('widget.network')
 local Vpn = require('widget.vpn')
 local Battery = require('widget.battery')
+local Bluetooth = require('widget.bluetooth')
 local Power = require('widget.power')
 local Systray = require('widget.systray')
-local gears = require('gears')
 local clickable_container = require('widget.material.clickable-container')
-local mat_icon_button = require('widget.material.icon-button')
-local mat_icon = require('widget.material.icon')
 local mat_colors = require('theme.mat-colors')
 local dpi = require('beautiful').xresources.apply_dpi
-local icons = require('theme.icons')
-
-local add_button = mat_icon_button(mat_icon(icons.plus, dpi(24)))
-add_button:buttons(gears.table.join(awful.button({}, 1, nil, function()
-  awful.spawn(awful.screen.focused().selected_tag.defaultApp,
-    {tag = _G.mouse.screen.selected_tag, placement = awful.placement.bottom_right})
-end)))
 
 -- Create an imagebox widget which will contains an icon indicating which layout we're using.
+local gears = require('gears')
 -- We need one layoutbox per screen.
 local LayoutBox = function(s)
   local layoutBox = clickable_container(awful.widget.layoutbox(s))
@@ -73,8 +65,9 @@ local TopPanel = function(s)
     {
       layout = wibox.layout.fixed.horizontal,
       Systray(s, mat_colors.green),
-      Keyboard(s, mat_colors.cyan),
-      Audio(s, mat_colors.hue_blue),
+      Keyboard(s, mat_colors.teal),
+      Audio(s, mat_colors.cyan),
+      Bluetooth(s, mat_colors.hue_blue),
       Wifi(s, mat_colors.blue),
       Network(s, mat_colors.indigo),
       Vpn(s, mat_colors.hue_purple),

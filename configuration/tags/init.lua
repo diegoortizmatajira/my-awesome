@@ -1,6 +1,5 @@
 local awful = require('awful')
 local apps = require('configuration.apps')
-local icons = require('layout.font-icons')
 
 local getDefaultScreen = function(preferredScreen)
   if screen.count() >= preferredScreen then

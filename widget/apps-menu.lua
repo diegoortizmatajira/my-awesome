@@ -1,5 +1,5 @@
 local awful = require('awful')
-local font_icons = require('layout.font-icons')
+local font_icons = require('widget.font-icons')
 
 local function AppMenu(_, color)
   local app_menu = font_icons.make_faicon(font_icons.home, color.hue_500, 8)

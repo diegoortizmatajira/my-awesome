@@ -1,4 +1,4 @@
-local font_icons = require('layout.font-icons')
+local font_icons = require('widget.font-icons')
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local dpi = require('beautiful').xresources.apply_dpi
 local wibox = require('wibox')
