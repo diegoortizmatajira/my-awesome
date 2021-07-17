@@ -39,7 +39,7 @@ local awesome_overrides = function(theme)
   theme.bg_normal = theme.background.hue_800
   theme.bg_focus = '#5a5a5a'
   theme.bg_urgent = '#3F3F3F'
-  theme.bg_systray = theme.background.hue_700
+  theme.bg_systray = theme.background.hue_800
 
   -- Borders
 

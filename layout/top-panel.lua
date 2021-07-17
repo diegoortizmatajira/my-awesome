@@ -72,6 +72,7 @@ local TopPanel = function(s)
     {TaskList(s), layout = wibox.layout.align.horizontal},
     {
       layout = wibox.layout.fixed.horizontal,
+      Systray(s, mat_colors.green),
       Keyboard(s, mat_colors.cyan),
       Audio(s, mat_colors.hue_blue),
       Wifi(s, mat_colors.blue),
@@ -79,8 +80,7 @@ local TopPanel = function(s)
       Vpn(s, mat_colors.hue_purple),
       Battery(s, mat_colors.purple),
       Clock(s, mat_colors.pink),
-      Power(s, mat_colors.red),
-      Systray(mat_colors.brown)
+      Power(s, mat_colors.red)
     }
   }
 
