@@ -128,7 +128,7 @@ local function Battery(_, color)
         medium_level_color = mat_colors.orange.hue_500,
         low_level_color = mat_colors.red.hue_700,
         bg_color = color.hue_900,
-        icon_color = color.hue_200,
+        icon_color = color.hue_100,
         enable_battery_warning = false
       }),
       layout = wibox.layout.fixed.horizontal

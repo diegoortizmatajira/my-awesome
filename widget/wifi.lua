@@ -100,7 +100,7 @@ local function Wifi(_, color)
         arc_thickness = 2,
         main_color = color.hue_500,
         bg_color = color.hue_900,
-        icon_color = color.hue_200
+        icon_color = color.hue_100
       }),
       layout = wibox.layout.fixed.horizontal
     },
