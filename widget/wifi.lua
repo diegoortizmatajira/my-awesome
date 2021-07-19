@@ -20,7 +20,7 @@ local function worker(user_args)
 
   local main_color = args.main_color or beautiful.fg_color
   local bg_color = args.bg_color or '#ffffff11'
-  local icon_color = args.icon_color or '#ffffff'
+  local icon_color = args.icon_color or beautiful.fg_color
 
   local text = wibox.widget{
     font = font,
@@ -85,7 +85,7 @@ local function worker(user_args)
 
 end
 
-local function wifi_arc_widget()
+local function internal_arc_widget()
   return setmetatable(wifiarc_widget, {
     __call = function(_, ...)
       return worker(...)
@@ -96,7 +96,7 @@ end
 local function Wifi(_, color)
   return {
     {
-      wifi_arc_widget()({
+      internal_arc_widget()({
         arc_thickness = 2,
         main_color = color.hue_500,
         bg_color = color.hue_900,
