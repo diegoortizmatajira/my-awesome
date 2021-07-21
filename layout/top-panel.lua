@@ -40,6 +40,7 @@ local TopPanel = function(s)
   local panel = wibox({
     ontop = true,
     screen = s,
+    type = 'dock',
     height = dpi(32),
     width = s.geometry.width,
     x = s.geometry.x,

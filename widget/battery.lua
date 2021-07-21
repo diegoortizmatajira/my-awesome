@@ -65,20 +65,18 @@ local function worker(user_args)
     widget.value = charge
 
     if status == 'Charging' then
-      text_with_background.bg = charging_color
-      text_with_background.fg = '#000000'
+      widget.colors = {charging_color}
     else
-      text_with_background.bg = '#00000000'
-      text_with_background.fg = main_color
+      if charge < 15 then
+        widget.colors = {low_level_color}
+      elseif charge > 15 and charge < 40 then
+        widget.colors = {medium_level_color}
+      else
+        widget.colors = {main_color}
+      end
     end
+    text_with_background.fg = main_color
 
-    if charge < 15 then
-      widget.colors = {low_level_color}
-    elseif charge > 15 and charge < 40 then
-      widget.colors = {medium_level_color}
-    else
-      widget.colors = {main_color}
-    end
   end
 
   watch("acpi", timeout, update_widget, batteryarc_widget)
@@ -124,7 +122,7 @@ local function Battery(_, color)
         show_current_level = true,
         arc_thickness = 2,
         main_color = color.hue_500,
-        charging_color = mat_colors.hue_green.hue_A200,
+        charging_color = mat_colors.hue_green.hue_A700,
         medium_level_color = mat_colors.orange.hue_500,
         low_level_color = mat_colors.red.hue_700,
         bg_color = color.hue_900,

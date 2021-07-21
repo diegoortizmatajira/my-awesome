@@ -22,7 +22,7 @@ theme.accent = mat_colors.orange
 
 -- Background
 theme.background = mat_colors.background
-theme.panel_background = theme.background.hue_800 .. '88'
+theme.panel_background = theme.background.hue_800 .. 'AA'
 local transparent = '#00000000'
 
 local awesome_overrides = function(theme)

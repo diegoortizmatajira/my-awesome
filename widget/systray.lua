@@ -6,7 +6,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 
 local function Systray(s, color)
   s.systray = wibox.widget{
-    base_size = 22,
+    base_size = 20,
     opacity = 2,
     visible = true,
     screen = 'primary',
@@ -15,7 +15,7 @@ local function Systray(s, color)
   local tray_container = wibox.widget{
     wibox.widget{
       wibox.widget{s.systray, layout = wibox.layout.fixed.horizontal},
-      top = dpi(4),
+      top = dpi(6),
       left = dpi(5),
       right = dpi(5),
       widget = wibox.container.margin
