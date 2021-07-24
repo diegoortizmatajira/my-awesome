@@ -7,6 +7,7 @@ local AppsMenu = require('widget.apps-menu')
 local Keyboard = require('widget.keyboard')
 local Audio = require('widget.audio')
 local Clock = require('widget.clock')
+local ControlCenterToggle = require('widget.control-center-toggle')
 local Wifi = require('widget.wifi')
 local Network = require('widget.network')
 local Vpn = require('widget.vpn')
@@ -74,7 +75,8 @@ local TopPanel = function(s)
       Vpn(s, mat_colors.hue_purple),
       Battery(s, mat_colors.purple),
       Clock(s, mat_colors.pink),
-      Power(s, mat_colors.red)
+      Power(s, mat_colors.red),
+      ControlCenterToggle(s, mat_colors.grey)
     }
   }
 
