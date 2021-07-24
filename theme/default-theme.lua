@@ -15,7 +15,7 @@ theme.font = serif_font
 -- Colors Pallets
 
 -- Primary
-theme.primary = mat_colors.lime
+theme.primary = mat_colors.hue_green
 
 -- Accent
 theme.accent = mat_colors.orange
@@ -81,8 +81,8 @@ local awesome_overrides = function(theme)
     from = {0, 0},
     to = {0, dpi(40)},
     stops = {
-      {0, theme.accent.hue_800},
-      {0.07, theme.accent.hue_800},
+      {0, theme.accent.hue_600},
+      {0.07, theme.accent.hue_600},
       {0.08, theme.background.hue_600 .. '66'},
       {0.95, theme.accent.hue_300 .. 'FF'}
     }
@@ -92,8 +92,8 @@ local awesome_overrides = function(theme)
     from = {0, 0},
     to = {0, dpi(40)},
     stops = {
-      {0, theme.accent.hue_800},
-      {0.07, theme.accent.hue_800},
+      {0, theme.accent.hue_600},
+      {0.07, theme.accent.hue_600},
       {0.08, theme.background.hue_600 .. '66'},
       {0.95, theme.background.hue_600 .. 'FF'}
     }
@@ -107,8 +107,8 @@ local awesome_overrides = function(theme)
     from = {0, 0},
     to = {0, dpi(40)},
     stops = {
-      {0, theme.primary.hue_800},
-      {0.07, theme.primary.hue_800},
+      {0, theme.primary.hue_400},
+      {0.07, theme.primary.hue_400},
       {0.08, theme.background.hue_600 .. '66'},
       {0.95, theme.background.hue_600 .. 'FF'}
     }
@@ -121,8 +121,8 @@ local awesome_overrides = function(theme)
   theme.icon_theme = 'Papirus-Dark'
 
   -- Client
-  theme.border_width = dpi(2)
-  theme.border_focus = theme.primary.hue_500
-  theme.border_normal = theme.background.hue_800
+  theme.border_width = dpi(1)
+  theme.border_focus = theme.primary.hue_500 .. 'AA'
+  theme.border_normal = theme.background.hue_700 .. 'AA'
 end
 return {theme = theme, awesome_overrides = awesome_overrides}

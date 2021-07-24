@@ -3,7 +3,46 @@ local wibox = require('wibox')
 local gears = require('gears')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-panel_visible = false
+local panel_visible = false
+
+local format_item = function(widget)
+  return wibox.widget{
+    {
+      {layout = wibox.layout.align.vertical, expand = 'none', nil, widget, nil},
+      margins = dpi(10),
+      widget = wibox.container.margin
+    },
+    forced_height = dpi(88),
+    bg = beautiful.groups_bg,
+    shape = function(cr, width, height)
+      gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
+    end,
+    widget = wibox.container.background
+  }
+end
+
+local format_item_no_fix_height = function(widget)
+  return wibox.widget{
+    {
+      {layout = wibox.layout.align.vertical, expand = 'none', nil, widget, nil},
+      margins = dpi(10),
+      widget = wibox.container.margin
+    },
+    bg = beautiful.groups_bg,
+    shape = function(cr, width, height)
+      gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
+    end,
+    widget = wibox.container.background
+  }
+end
+
+local vertical_separator = wibox.widget{
+  orientation = 'vertical',
+  forced_height = dpi(1),
+  forced_width = dpi(1),
+  span_ratio = 0.55,
+  widget = wibox.widget.separator
+}
 
 local function control_bar(s)
   local panel_width = dpi(400)
@@ -34,6 +73,7 @@ local function control_bar(s)
               -- monitor_control_row_progressbars
             }
           }
+
         },
         margins = dpi(16),
         widget = wibox.container.margin
