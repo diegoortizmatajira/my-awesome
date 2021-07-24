@@ -83,8 +83,8 @@ local awesome_overrides = function(theme)
     stops = {
       {0, theme.accent.hue_800},
       {0.07, theme.accent.hue_800},
-      {0.08, transparent},
-      {0.95, theme.accent.hue_300}
+      {0.08, theme.background.hue_600 .. '66'},
+      {0.95, theme.accent.hue_300 .. 'FF'}
     }
   }
   theme.taglist_bg_focus = {
@@ -94,8 +94,8 @@ local awesome_overrides = function(theme)
     stops = {
       {0, theme.accent.hue_800},
       {0.07, theme.accent.hue_800},
-      {0.08, transparent},
-      {0.95, theme.background.hue_600}
+      {0.08, theme.background.hue_600 .. '66'},
+      {0.95, theme.background.hue_600 .. 'FF'}
     }
   }
   -- Tasklist
@@ -109,8 +109,8 @@ local awesome_overrides = function(theme)
     stops = {
       {0, theme.primary.hue_800},
       {0.07, theme.primary.hue_800},
-      {0.08, transparent},
-      {0.95, theme.background.hue_600}
+      {0.08, theme.background.hue_600 .. '66'},
+      {0.95, theme.background.hue_600 .. 'FF'}
     }
   }
   theme.tasklist_bg_urgent = theme.primary.hue_800
