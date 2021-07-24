@@ -1,7 +1,7 @@
 local awful = require('awful')
 local wibox = require('wibox')
 local modkey = require('configuration.keys.mod').modKey
-local font_icons = require('layout.font-icons')
+local font_icons = require('widget.font-icons')
 
 local TagList = function(s, color)
   return {

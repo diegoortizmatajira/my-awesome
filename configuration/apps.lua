@@ -19,7 +19,8 @@ return {
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
-    'picom -bc',
+    -- 'picom -bc',
+    'picom -b --experimental-backends --dbus',
     'nm-applet --indicator', -- wifi
     'blueman-applet', -- Bluetooth applet
     '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
@@ -28,6 +29,7 @@ return {
     'clipmenud',
     '/usr/lib/kdeconnectd',
     'barrier',
+    [[xcape -e 'Super_L=Super_L|Control_L|Escape']],
     -- Add applications that need to be killed between reloads
     -- to avoid multipled instances, inside the awspawn script
     '~/.config/awesome/configuration/awspawn' -- Spawn "dirty" apps that can linger between sessions

@@ -1,4 +1,4 @@
-local font_icons = require('layout.font-icons')
+local font_icons = require('widget.font-icons')
 local wibox = require('wibox')
 local awful = require('awful')
 
