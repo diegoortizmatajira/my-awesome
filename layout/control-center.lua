@@ -3,7 +3,7 @@ local wibox = require('wibox')
 local gears = require('gears')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local panel_visible = false
+panel_visible = false
 
 local format_item = function(widget)
   return wibox.widget{
@@ -44,6 +44,26 @@ local vertical_separator = wibox.widget{
   widget = wibox.widget.separator
 }
 
+local control_center_row_one = wibox.widget{
+  layout = wibox.layout.align.horizontal,
+  forced_height = dpi(48),
+  nil,
+  format_item(require('widget.user-profile')())
+  -- {
+  -- 	format_item(
+  -- 		{
+  -- 			layout = wibox.layout.fixed.horizontal,
+  -- 			spacing = dpi(10),
+  -- 			require('widget.control-center-switch')(),
+  -- 			vertical_separator,
+  -- 			require('widget.end-session')()
+  -- 		}
+  -- 	),
+  -- 	left = dpi(10),
+  -- 	widget = wibox.container.margin
+  -- }
+}
+
 local function control_bar(s)
   local panel_width = dpi(400)
   local panel_margins = dpi(5)
@@ -53,7 +73,7 @@ local function control_bar(s)
         {
           layout = wibox.layout.fixed.vertical,
           spacing = dpi(10),
-          -- control_center_row_one,
+          control_center_row_one,
           {
             layout = wibox.layout.stack,
             {
