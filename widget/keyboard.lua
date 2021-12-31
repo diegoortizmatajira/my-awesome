@@ -8,7 +8,7 @@ local function Keyboard(s, color)
             font_icons.make_faicon(font_icons.keyboard, color.hue_500),
             {
                 awful.widget.watch([[bash -c "localectl status | grep Layout | cut -d ':' -f2- && echo ''"]], 15),
-                fg = color.hue_100, 
+                fg = color.hue_100,
                 widget = wibox.container.background
             },
             layout = wibox.layout.fixed.horizontal
