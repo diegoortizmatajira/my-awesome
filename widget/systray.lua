@@ -4,6 +4,7 @@ local beautiful = require('beautiful')
 local font_icons = require('widget.font-icons')
 local dpi = require('beautiful').xresources.apply_dpi
 local gears = require('gears')
+local clickable_container = require('widget.material.clickable-container')
 
 local function button_shape(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, 3)
@@ -34,9 +35,6 @@ local function Systray(s, color)
     }
 
     local toggler_widget = font_icons.make_faicon(font_icons.expand, color.hue_400, dpi(8))
-    toggler_widget:connect_signal("button::press", function(_, _, _, button)
-        if (button == 1) then awesome.emit_signal('widget::systray:toggle') end
-    end)
 
     awesome.connect_signal('widget::systray:toggle', function()
         tray_container.visible = not tray_container.visible
@@ -47,7 +45,11 @@ local function Systray(s, color)
         end
         -- end
     end)
-    local result = wibox.widget{tray_container, toggler_widget, layout = wibox.layout.fixed.horizontal }
+    local layoutBox = clickable_container(toggler_widget)
+    layoutBox:buttons(awful.util.table.join(awful.button({}, 1, function()
+        awesome.emit_signal('widget::systray:toggle')
+    end)))
+    local result = wibox.widget{tray_container, layoutBox, layout = wibox.layout.fixed.horizontal }
     return awful.widget.only_on_screen(result, 'primary')
 end
 

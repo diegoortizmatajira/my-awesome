@@ -1,9 +1,10 @@
 local font_icons = require('widget.font-icons')
 local wibox = require('wibox')
 local awful = require('awful')
+local clickable_container = require('widget.material.clickable-container')
 
 local function Keyboard(s, color)
-    return {
+    local custom_widget = {
         {
             font_icons.make_faicon(font_icons.keyboard, color.hue_500),
             {
@@ -17,6 +18,7 @@ local function Keyboard(s, color)
         right = 5,
         widget = wibox.container.margin
     }
+    return clickable_container(custom_widget)
 end
 
 return Keyboard
