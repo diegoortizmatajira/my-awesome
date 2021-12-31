@@ -31,7 +31,7 @@ local TagList = function(s, color)
                     end)),
                 layout = {
                     spacing = 10,
-                    spacing_widget = font_icons.make_icon(font_icons.tag_separator, color.hue_900),
+                    spacing_widget = font_icons.make_faicon(font_icons.tag_separator, color.hue_900),
                     layout = wibox.layout.fixed.horizontal
                 },
                 style = {
