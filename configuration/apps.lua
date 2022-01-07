@@ -19,7 +19,6 @@ return {
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
-    -- 'picom -bc',
     'picom -b --experimental-backends --dbus',
     'nm-applet --indicator', -- wifi
     'blueman-applet', -- Bluetooth applet
@@ -33,5 +32,9 @@ return {
     -- Add applications that need to be killed between reloads
     -- to avoid multipled instances, inside the awspawn script
     '~/.config/awesome/configuration/awspawn' -- Spawn "dirty" apps that can linger between sessions
+  },
+  -- List of binaries/shell scripts that will execute for a certain task
+  utils = {
+    profile_image = 'profile-image'
   }
 }

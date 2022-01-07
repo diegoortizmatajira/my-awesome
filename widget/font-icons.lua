@@ -55,6 +55,7 @@ return {
   collapse = '\u{f101}',
   expand = '\u{f100}',
   toggle = '\u{f3f2}',
+  notification = '\u{f4a6}',
   terminal = '\u{f120}',
   browser = '\u{f267}',
   make_faicon = make_faicon,

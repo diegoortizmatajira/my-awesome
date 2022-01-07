@@ -1,4 +1,5 @@
 local awful = require('awful')
+local beautiful = require('beautiful')
 local modalbind = require("configuration.keys.modal-binding")
 modalbind.init()
 
@@ -22,7 +23,13 @@ end
 
 local function focus_client(direction)
   return function()
+    -- local current_layout = awful.layout.getname()
+    -- if current_layout == 'max' then
+    --   awful.client.next(1).raise()
+    --   awful.spawn('notify-send ' .. current_layout)
+    -- else
     awful.client.focus.global_bydirection(direction)
+    -- end
   end
 end
 
@@ -115,7 +122,8 @@ local globalKeys = awful.util.table.join( -- Awesome
     awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}), awful.key({modkey}, 'Tab',
     awful.tag.history.restore, {description = 'Go to last used workspace', group = 'Workspaces'}), -- Applications
   awful.key({modkey}, 's', spawn('custom-launcher'), {description = 'Application Launcher', group = 'Applications'}),
-  awful.key({modkey, 'Control'}, 'Escape', spawn('custom-launcher'), {description = 'Application Launcher', group = 'Applications'}),
+  awful.key({modkey, 'Control'}, 'Escape', spawn('custom-launcher'),
+    {description = 'Application Launcher', group = 'Applications'}),
   awful.key({modkey}, 't', spawn(apps.default.editor), {description = 'Open a text editor', group = 'Applications'}),
   awful.key({modkey}, 'b', spawn(apps.default.browser), {description = 'Open a browser', group = 'Applications'}),
   awful.key({modkey}, 'x', spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
