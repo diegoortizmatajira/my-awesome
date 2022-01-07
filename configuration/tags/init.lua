@@ -1,6 +1,5 @@
 local awful = require('awful')
 local apps = require('configuration.apps')
-local icons = require('layout.font-icons')
 
 local getDefaultScreen = function(preferredScreen)
   if screen.count() >= preferredScreen then
@@ -24,10 +23,10 @@ local tags = {
 }
 
 awful.layout.layouts = {
+  awful.layout.suit.max,
   awful.layout.suit.tile,
   awful.layout.suit.tile.bottom,
-  awful.layout.suit.corner.nw,
-  awful.layout.suit.max
+  awful.layout.suit.corner.nw
 }
 
 local taglist
@@ -36,7 +35,7 @@ if taglist == nil or #taglist == 0 then
   taglist = {}
   for _, tag in ipairs(tags) do
     table.insert(taglist, awful.tag.add(tag.name, {
-      layout = awful.layout.suit.tile,
+      layout = awful.layout.suit.max,
       gap_single_client = false,
       gap = 4,
       screen = getDefaultScreen(tag.screen),

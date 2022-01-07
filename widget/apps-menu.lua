@@ -1,12 +1,13 @@
 local awful = require('awful')
-local font_icons = require('layout.font-icons')
+local font_icons = require('widget.font-icons')
+local clickable_container = require('widget.material.clickable-container')
 
-local function AppMenu(s, color)
-  local app_menu = font_icons.make_faicon(font_icons.home, color, 8)
-  app_menu:connect_signal("button::press", function(_, _, _, button)
-    if (button == 1) then awful.spawn('custom-launcher') end
-  end)
-  return app_menu
+local function AppMenu(_, color)
+    local layoutBox = clickable_container(font_icons.make_faicon(font_icons.home, color.hue_500, 8))
+    layoutBox:buttons(awful.util.table.join(awful.button({}, 1, function()
+        awful.spawn('custom-launcher')
+    end)))
+    return layoutBox
 end
 
 return AppMenu

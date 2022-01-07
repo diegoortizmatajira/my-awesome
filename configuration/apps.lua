@@ -19,9 +19,8 @@ return {
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
-    'picom -bc',
+    'picom -b --experimental-backends --dbus',
     'nm-applet --indicator', -- wifi
-    'pnmixer', -- shows an audiocontrol applet in systray when installed.
     'blueman-applet', -- Bluetooth applet
     '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
     'xfce4-power-manager', -- Power manager
@@ -29,8 +28,13 @@ return {
     'clipmenud',
     '/usr/lib/kdeconnectd',
     'barrier',
+    [[xcape -e 'Super_L=Super_L|Control_L|Escape']],
     -- Add applications that need to be killed between reloads
     -- to avoid multipled instances, inside the awspawn script
     '~/.config/awesome/configuration/awspawn' -- Spawn "dirty" apps that can linger between sessions
+  },
+  -- List of binaries/shell scripts that will execute for a certain task
+  utils = {
+    profile_image = 'profile-image'
   }
 }
