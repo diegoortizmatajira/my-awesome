@@ -6,7 +6,7 @@ local client_buttons = require('configuration.client.buttons')
 -- Rules
 awful.rules.rules = {
     -- All clients will match this rule.
-    {
+{
         rule = {},
         properties = {
             focus = awful.client.focus.filter,
@@ -25,12 +25,28 @@ awful.rules.rules = {
             maximized_vertical = false
         }
     },
-    {
+{
         rule_any = {name = {'QuakeTerminal'}},
         properties = {skip_decoration = true}
     },
+{
+
+        rule = { class = 'jetbrains-.*', name = 'win0'},
+        properties = {
+            placement = awful.placement.centered,
+            ontop = true,
+            floating = true,
+            drawBackdrop = true,
+            shape = function()
+                return function(cr, w, h)
+                    gears.shape.rounded_rect(cr, w, h, 8)
+                end
+            end,
+            skip_decoration = true
+        }
+    },
     -- Titlebars
-    {
+{
         rule_any = {type = {'dialog'}, class = {'Wicd-client.py', 'calendar.google.com'}, role = {'Popup'}},
         properties = {
             placement = awful.placement.centered,
