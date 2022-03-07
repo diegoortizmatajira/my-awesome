@@ -31,6 +31,19 @@ awful.rules.rules = {
     },
 {
 
+        rule = { name = 'Picture-in-Picture'},
+        properties = {
+            floating = true,
+            shape = function()
+                return function(cr, w, h)
+                    gears.shape.rounded_rect(cr, w, h, 8)
+                end
+            end,
+            skip_decoration = true
+        }
+    },
+{
+
         rule = { class = 'jetbrains-.*', name = 'win0'},
         properties = {
             placement = awful.placement.centered,
