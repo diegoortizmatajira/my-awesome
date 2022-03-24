@@ -23,13 +23,7 @@ end
 
 local function focus_client(direction)
   return function()
-    -- local current_layout = awful.layout.getname()
-    -- if current_layout == 'max' then
-    --   awful.client.next(1).raise()
-    --   awful.spawn('notify-send ' .. current_layout)
-    -- else
     awful.client.focus.global_bydirection(direction)
-    -- end
   end
 end
 
@@ -42,6 +36,45 @@ end
 local function toggle_show_desktop()
   for _, c in ipairs(mouse.screen.selected_tag:clients()) do c.minimized = true end
 end
+
+local function move_tag_to_screen(relative)
+  local t = client.focus and client.focus.first_tag or nil
+  if t == nil then return end
+  awful.screen.focus_bydirection(relative, t.screen)
+  t.screen = awful.screen.focused()
+  awful.tag.viewonly(t)
+end
+
+local screen_move_map = {
+  {
+    "h",
+    function()
+      move_tag_to_screen('left')
+    end,
+    "Move to screen on the left"
+  },
+  {
+    "l",
+    function()
+      move_tag_to_screen('right')
+    end,
+    "Move to screen on the right"
+  },
+  {
+    "k",
+    function()
+      move_tag_to_screen('up')
+    end,
+    "Move to screen above"
+  },
+  {
+    "j",
+    function()
+      move_tag_to_screen('down')
+    end,
+    "Move to screen below"
+  }
+}
 
 local layout_modify_map = {
   {
@@ -101,7 +134,6 @@ local globalKeys = awful.util.table.join( -- Awesome
   awful.key({modkey, 'Shift'}, 'l', spawn(apps.default.lock), {description = 'Lock the screen', group = 'Hotkeys'}),
   awful.key({modkey}, 'v', spawn('custom-clipboard'), {description = 'Recent clipboard', group = 'Hotkeys'}),
   awful.key({modkey}, 'm', toggle_minimize_all(true), {description = 'Minimize all windows', group = 'Hotkeys'}),
-  awful.key({modkey, 'Shift'}, 'm', toggle_minimize_all(false), {description = 'Restore all windows', group = 'Hotkeys'}),
   awful.key({modkey}, 'd', toggle_show_desktop, {description = 'Show desktop', group = 'Hotkeys'}),
   awful.key({modkey, 'Shift'}, 'd', spawn('custom-wallpaper'), {description = 'Next wallpaper', group = 'Hotkeys'}), -- Window Focus
   awful.key({modkey}, 'j', focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
@@ -144,13 +176,17 @@ local globalKeys = awful.util.table.join( -- Awesome
   -- Layout: Master Size
   awful.key({modkey}, 'r', function()
     modalbind.grab({keymap = layout_modify_map, name = 'Modify layout', stay_in_mode = true})
-  end, {description = 'Resizes the current layout', group = 'Modes'}), awful.key({modkey}, 'space', function()
+  end, {description = 'Resizes the current layout', group = 'Modes'}), -- Layout: Move tags to different screen
+  awful.key({modkey, 'Shift'}, 'r', function()
+    modalbind.grab({keymap = screen_move_map, name = 'Move current tag to screen', stay_in_mode = true})
+  end, {description = 'Relocate current Tag', group = 'Modes'}), awful.key({modkey}, 'space', function()
     awful.layout.inc(1)
   end, {description = 'Select next Layout', group = 'Layout Distribution'}),
   awful.key({modkey, 'Shift'}, 'space', function()
     awful.layout.inc(-1)
   end, {description = 'Select previous Layout', group = 'Layout Distribution'}),
-  awful.key({modkey, 'Shift'}, 'Next', function()
+  awful.key({modkey, 'Shift'}, 'Prior', toggle_minimize_all(false),
+    {description = 'Restore all windows', group = 'Windows'}), awful.key({modkey, 'Shift'}, 'Next', function()
     local c = awful.client.restore()
     -- Focus restored client
     if c then

@@ -69,6 +69,21 @@ awful.rules.rules = {
     }
   },
   {
+    rule = {class = 'zoom ', name = 'zoom '},
+    properties = {
+      placement = awful.placement.centered,
+      ontop = true,
+      floating = true,
+      drawBackdrop = true,
+      shape = function()
+        return function(cr, w, h)
+          gears.shape.rounded_rect(cr, w, h, 8)
+        end
+      end,
+      skip_decoration = true
+    }
+  },
+  {
     rule = {class = 'jetbrains-.*', name = 'Welcome to JetBrains Rider'},
     properties = {
       placement = awful.placement.centered,
