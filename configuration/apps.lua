@@ -26,7 +26,6 @@ return {
     'xfce4-power-manager', -- Power manager
     'custom-wallpaper',
     'clipmenud',
-    '/usr/lib/kdeconnectd',
     'barrier',
     [[xcape -e 'Super_L=Super_L|Control_L|Escape']],
     -- Add applications that need to be killed between reloads
