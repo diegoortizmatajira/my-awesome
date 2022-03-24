@@ -42,7 +42,6 @@ awful.rules.rules = {
     rule = {class = 'zoom', name = 'Settings'},
     properties = {
       placement = awful.placement.centered,
-      ontop = true,
       floating = true,
       drawBackdrop = true,
       shape = function()
@@ -54,27 +53,11 @@ awful.rules.rules = {
     }
   },
   {
-    rule = {class = 'zoom', name = 'Select a window or an application that you want to share'},
+    rule = {class = 'zoom', name = 'Select.*'},
     properties = {
       placement = awful.placement.centered,
-      ontop = true,
       floating = true,
-      drawBackdrop = true,
-      shape = function()
-        return function(cr, w, h)
-          gears.shape.rounded_rect(cr, w, h, 8)
-        end
-      end,
-      skip_decoration = true
-    }
-  },
-  {
-    rule = {class = 'zoom ', name = 'zoom '},
-    properties = {
-      placement = awful.placement.centered,
-      ontop = true,
-      floating = true,
-      drawBackdrop = true,
+      drawBackdrop = false,
       shape = function()
         return function(cr, w, h)
           gears.shape.rounded_rect(cr, w, h, 8)
