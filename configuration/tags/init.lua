@@ -2,23 +2,24 @@ local awful = require('awful')
 local apps = require('configuration.apps')
 
 local getDefaultScreen = function(preferredScreen)
-  if screen.count() >= preferredScreen then
+  local screen_count = screen.count()
+  if preferredScreen <= screen_count then
     return preferredScreen
   else
-    return 1
+    return screen_count
   end
 end
 
 local tags = {
   {name = 1, defaultApp = apps.default.browser, screen = 1},
-  {name = 2, defaultApp = apps.default.rofi, screen = 2},
-  {name = 3, defaultApp = apps.default.rofi, screen = 3},
+  {name = 2, defaultApp = apps.default.rofi, screen = 1},
+  {name = 3, defaultApp = apps.default.rofi, screen = 1},
   {name = 4, defaultApp = apps.default.rofi, screen = 1},
   {name = 5, defaultApp = apps.default.rofi, screen = 1},
   {name = 6, defaultApp = apps.default.rofi, screen = 1},
   {name = 7, defaultApp = apps.default.rofi, screen = 1},
-  {name = 8, defaultApp = apps.default.rofi, screen = 1},
-  {name = 9, defaultApp = apps.default.rofi, screen = 1},
+  {name = 8, defaultApp = apps.default.rofi, screen = 2},
+  {name = 9, defaultApp = apps.default.rofi, screen = 3},
   {name = 0, defaultApp = apps.default.terminal, screen = 1}
 }
 
