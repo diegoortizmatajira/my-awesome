@@ -11,16 +11,16 @@ local getDefaultScreen = function(preferredScreen)
 end
 
 local tags = {
-  {name = 1, defaultApp = apps.default.browser, screen = 1},
-  {name = 2, defaultApp = apps.default.rofi, screen = 1},
-  {name = 3, defaultApp = apps.default.rofi, screen = 1},
-  {name = 4, defaultApp = apps.default.rofi, screen = 1},
-  {name = 5, defaultApp = apps.default.rofi, screen = 1},
-  {name = 6, defaultApp = apps.default.rofi, screen = 1},
-  {name = 7, defaultApp = apps.default.rofi, screen = 1},
-  {name = 8, defaultApp = apps.default.rofi, screen = 2},
-  {name = 9, defaultApp = apps.default.rofi, screen = 3},
-  {name = 0, defaultApp = apps.default.terminal, screen = 1}
+  {name = 1, defaultApp = apps.default.browser, screen = 1, layout = awful.layout.suit.max},
+  {name = 2, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 3, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 4, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 5, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 6, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 7, defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
+  {name = 8, defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
+  {name = 9, defaultApp = apps.default.rofi, screen = 3, layout = awful.layout.suit.tile},
+  {name = 0, defaultApp = apps.default.terminal, screen = 1, layout = awful.layout.suit.max}
 }
 
 awful.layout.layouts = {
@@ -36,7 +36,7 @@ if taglist == nil or #taglist == 0 then
   taglist = {}
   for _, tag in ipairs(tags) do
     table.insert(taglist, awful.tag.add(tag.name, {
-      layout = awful.layout.suit.max,
+      layout = tag.layout,
       gap_single_client = false,
       gap = 4,
       screen = getDefaultScreen(tag.screen),
