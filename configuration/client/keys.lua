@@ -27,6 +27,24 @@ local clientKeys =
             end,
             {description = 'Close Window', group = 'Windows'}
         ),
+        awful.key({modkey}, '[',
+            function (_)
+                local selection = awful.client.next(-1)
+                if selection then
+                    client.focus = selection
+                    selection:raise()
+                end
+            end,
+            {description = "Previous window in tag", group = "Windows"}),
+        awful.key({modkey}, ']',
+            function (_)
+                local selection = awful.client.next(1)
+                if selection then
+                    client.focus = selection
+                    selection:raise()
+                end
+            end,
+            {description = "Next window in tag", group = "Windows"}),
         awful.key({modkey}, 'Next',
             function(c)
                 c.minimized = true
