@@ -19,15 +19,18 @@ local tags = {
   {name = 6, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
   {name = 7, defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
   {name = 8, defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
-  {name = 9, defaultApp = apps.default.rofi, screen = 3, layout = awful.layout.suit.tile},
+  {name = 9, defaultApp = apps.default.rofi, screen = 3, layout = awful.layout.suit.tile.left},
   {name = 0, defaultApp = apps.default.terminal, screen = 1, layout = awful.layout.suit.max}
 }
 
 awful.layout.layouts = {
   awful.layout.suit.max,
-  awful.layout.suit.tile,
+  awful.layout.suit.tile.left,
+  awful.layout.suit.tile.right,
+  awful.layout.suit.tile.top,
   awful.layout.suit.tile.bottom,
-  awful.layout.suit.corner.nw
+  awful.layout.suit.corner.nw,
+  awful.layout.suit.floating
 }
 
 local taglist
