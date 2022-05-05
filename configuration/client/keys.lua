@@ -27,7 +27,7 @@ local clientKeys =
             end,
             {description = 'Close Window', group = 'Windows'}
         ),
-        awful.key({modkey}, '[',
+        awful.key({modkey}, ',',
             function (_)
                 local selection = awful.client.next(-1)
                 if selection then
@@ -36,7 +36,7 @@ local clientKeys =
                 end
             end,
             {description = "Previous window in tag", group = "Windows"}),
-        awful.key({modkey}, ']',
+        awful.key({modkey}, '.',
             function (_)
                 local selection = awful.client.next(1)
                 if selection then

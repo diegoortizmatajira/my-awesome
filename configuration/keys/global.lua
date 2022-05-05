@@ -128,7 +128,6 @@ local globalKeys = awful.util.table.join( -- Awesome
 awful.key({modkey, 'Control'}, 'r', awesome.restart, {description = 'Reload Awesome', group = 'Awesome'}),
 awful.key({modkey, 'Control'}, 'q', awesome.quit, {description = 'Quit Awesome', group = 'Awesome'}), -- Hotkeys
 awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
-awful.key({modkey}, ',', hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
 awful.key({modkey}, 'a', spawn('ibus emoji', true), {description = 'Emoji Picker', group = 'Hotkeys'}),
 awful.key({modkey}, 'g', spawn('custom-nordvpn-menu'), {description = 'Nordvpn options', group = 'Hotkeys'}),
 awful.key({modkey}, 'p', spawn('custom-layout'), {description = 'Display Layout options', group = 'Hotkeys'}),
