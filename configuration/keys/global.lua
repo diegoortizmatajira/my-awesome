@@ -3,7 +3,6 @@ local beautiful = require('beautiful')
 local modalbind = require("configuration.keys.modal-binding")
 modalbind.init()
 
-
 require('awful.autofocus')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 
@@ -147,7 +146,8 @@ awful.key({modkey}, 'Right', focus_client('right'), {description = 'Focus window
 awful.key({modkey}, 'Left', focus_client('left'), {description = 'Focus window on the left', group = 'Windows'}),
 awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'Jump to urgent window', group = 'Windows'}),
 awful.key({altkey}, 'Tab', spawn('custom-alttab'), {description = 'Switch to other window', group = 'Windows'}), -- Navigate workspaces
-awful.key({altkey, 'Control'}, 'Tab', spawn('custom-window-switch-local'), {description = 'Switch to other window in current tag', group = 'Windows'}), -- Navigate workspaces
+awful.key({altkey, 'Control'}, 'Tab', spawn('custom-window-switch-local'),
+{description = 'Switch to other window in current tag', group = 'Windows'}), -- Navigate workspaces
 awful.key({modkey, 'Control'}, 'j', awful.tag.viewprev,
 {description = 'Go to previous workspace', group = 'Workspaces'}), awful.key({modkey, 'Control'}, 'k',
 awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
@@ -175,7 +175,7 @@ awful.key({'Shift'}, 'Print', spawn(apps.default.delayed_screenshot, true), {
 {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
 awful.key({modkey, 'Shift'}, 's', spawn(apps.default.region_screenshot, true),
 {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
-awful.key({altkey }, 'Print', spawn(apps.default.ocr_screenshot, true),
+awful.key({altkey}, 'Print', spawn(apps.default.ocr_screenshot, true),
 {description = 'Mark an area and OCR its content to your clipboard', group = 'screenshots (clipboard)'}),
 -- Layout: Master Size
 awful.key({modkey}, 'r', function()
@@ -231,6 +231,38 @@ awful.layout.inc(1)
   end, {description = 'Move window to a new empty workspace', group = 'Workspaces'}) -- Screen management
   )
 
+  local function Change_to_tag_i(i)
+      return function()
+          local screen = awful.screen.focused()
+          local tag = tags[i]
+          if tag then
+              -- Only moves empty tags when the screen has more tags
+              if #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then awful.tag.setscreen(screen, tag) end
+              tag:view_only()
+              awful.screen.focus(tag.screen)
+          end
+      end
+  end
+
+  local function Toggle_tag_i(i)
+      return function()
+          local tag = tags[i]
+          if tag then awful.tag.viewtoggle(tag) end
+      end
+  end
+
+  local function Move_to_tag_i(i)
+      return function()
+          if client.focus then
+              local tag = tags[i]
+              if tag then
+                  client.focus:move_to_tag(tag)
+                  tag:view_only()
+              end
+          end
+      end
+  end
+  local np_map = {87, 88, 89, 83, 84, 85, 79, 80, 81, 90}
   -- Bind all key numbers to tags.
   -- Be careful: we use keycodes to make it works on any keyboard layout.
   -- This should map on the top row of your keyboard, usually 1 to 9.
@@ -241,31 +273,16 @@ awful.layout.inc(1)
           descr_view = {description = 'Focus workspace #', group = 'Workspaces'}
           descr_toggle = {description = 'Toggle tag visibility #', group = 'Workspaces'}
           descr_move = {description = 'Move focused window to workspace #', group = 'Workspaces'}
+
       end
+      local num_pad_i = i % 10
       globalKeys = awful.util.table.join(globalKeys, -- View tag only.
-      awful.key({modkey}, '#' .. i + 9, function()
-          local screen = awful.screen.focused()
-          local tag = tags[i]
-          if tag then
-              -- Only moves empty tags when the screen has more tags
-              if #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then awful.tag.setscreen(screen, tag) end
-              tag:view_only()
-              awful.screen.focus(tag.screen)
-          end
-      end, descr_view), -- Toggle tag display.
-      awful.key({modkey, 'Control'}, '#' .. i + 9, function()
-          local tag = tags[i]
-          if tag then awful.tag.viewtoggle(tag) end
-      end, descr_toggle), -- Move client to tag.
-      awful.key({modkey, 'Shift'}, '#' .. i + 9, function()
-          if client.focus then
-              local tag = tags[i]
-              if tag then
-                  client.focus:move_to_tag(tag)
-                  tag:view_only()
-              end
-          end
-      end, descr_move))
+      awful.key({modkey}, '#' .. i + 9, Change_to_tag_i(i), descr_view), -- Toggle tag display.
+      awful.key({modkey}, '#' .. np_map[i], Change_to_tag_i(i), descr_view), -- Toggle tag display.
+      awful.key({modkey, 'Control'}, '#' .. i + 9, Toggle_tag_i(i), descr_toggle), -- Move client to tag.
+      awful.key({modkey, 'Control'}, '#' .. np_map[i], Toggle_tag_i(i), descr_toggle), -- Move client to tag.
+      awful.key({modkey, 'Shift'}, '#' .. i + 9, Move_to_tag_i(i), descr_move),
+      awful.key({modkey, 'Shift'}, '#' .. np_map[i], Move_to_tag_i(i), descr_move))
   end
 
   return globalKeys
