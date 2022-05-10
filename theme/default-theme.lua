@@ -67,6 +67,8 @@ local awesome_overrides = function(theme)
 
   theme.layout_max = theme.icons .. 'layouts/max.png'
   theme.layout_tile = theme.icons .. 'layouts/tile.png'
+  theme.layout_tileleft = theme.icons .. 'layouts/tileleft.png'
+  theme.layout_tiletop = theme.icons .. 'layouts/tiletop.png'
   theme.layout_tilebottom = theme.icons .. 'layouts/tilebottom.png'
   theme.layout_floating = theme.icons .. 'layouts/floating.png'
   theme.layout_cornernw = theme.icons .. 'layouts/cornernw.png'

@@ -4,7 +4,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local wibox = require('wibox')
 local clickable_container = require('widget.material.clickable-container')
 
-local function Clock(s, color)
+local function Clock(_, color)
     -- Clock / Calendar 12AM/PM fornat
     local textclock = wibox.widget.textclock(string.format([[<span color='%s'>%s</span>]], color.hue_100, '%a %I:%M %p'))
 

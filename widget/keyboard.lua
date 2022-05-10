@@ -3,7 +3,7 @@ local wibox = require('wibox')
 local awful = require('awful')
 local clickable_container = require('widget.material.clickable-container')
 
-local function Keyboard(s, color)
+local function Keyboard(_, color)
     local custom_widget = {
         {
             font_icons.make_faicon(font_icons.keyboard, color.hue_500),

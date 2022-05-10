@@ -8,7 +8,8 @@ return {
     lock = 'custom-lock',
     quake = 'kitty',
     screenshot = 'flameshot screen -c',
-    region_screenshot = 'flameshot gui',
+    region_screenshot = 'flameshot gui -c',
+    ocr_screenshot = 'custom-ocr',
     delayed_screenshot = 'flameshot screen -c -d 5000',
     browser = 'firefox-developer-edition',
     editor = 'subl', -- gui text editor
@@ -26,7 +27,6 @@ return {
     'xfce4-power-manager', -- Power manager
     'custom-wallpaper',
     'clipmenud',
-    '/usr/lib/kdeconnectd',
     'barrier',
     [[xcape -e 'Super_L=Super_L|Control_L|Escape']],
     -- Add applications that need to be killed between reloads
