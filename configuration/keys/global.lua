@@ -3,6 +3,8 @@ local beautiful = require('beautiful')
 local modalbind = require("configuration.keys.modal-binding")
 modalbind.init()
 
+local MOVE_TO_CURRENT_DISPLAY = false
+
 require('awful.autofocus')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 
@@ -201,20 +203,35 @@ local globalKeys = awful.util.table.join( -- Awesome
   awful.key({}, 'XF86PowerOff', spawn('custom-askpoweroptions')), awful.key({modkey}, 'n', function()
     local screen = awful.screen.focused()
     for _, tag in ipairs(tags) do
-      if #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then
-        awful.tag.setscreen(screen, tag)
-        tag:view_only()
-        return
+      if #tag:clients() == 0 and not tag.selected then
+        if MOVE_TO_CURRENT_DISPLAY and #tag.screen.tags > 1 then
+          awful.tag.setscreen(screen, tag)
+          tag:view_only()
+          return
+        else
+          if tag.screen.index == screen.index then
+            tag:view_only()
+            return
+          end
+        end
       end
     end
   end, {description = 'Go to new empty workspace', group = 'Workspaces'}), awful.key({modkey, 'Shift'}, 'n', function()
     local screen = awful.screen.focused()
     for _, tag in ipairs(tags) do
-      if client.focus and #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then
-        awful.tag.setscreen(screen, tag)
-        client.focus:move_to_tag(tag)
-        tag:view_only()
-        return
+      if client.focus and #tag:clients() == 0 and not tag.selected then
+        if MOVE_TO_CURRENT_DISPLAY and #tag.screen.tags > 1 then
+          awful.tag.setscreen(screen, tag)
+          client.focus:move_to_tag(tag)
+          tag:view_only()
+          return
+        else
+          if tag.screen.index == screen.index then
+            client.focus:move_to_tag(tag)
+            tag:view_only()
+            return
+          end
+        end
       end
     end
   end, {description = 'Move window to a new empty workspace', group = 'Workspaces'}) -- Screen management
@@ -225,8 +242,9 @@ local function Change_to_tag_i(i)
     local screen = awful.screen.focused()
     local tag = tags[i]
     if tag then
-      -- Only moves empty tags when the screen has more tags
-      if #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then awful.tag.setscreen(screen, tag) end
+      if MOVE_TO_CURRENT_DISPLAY and #tag:clients() == 0 and not tag.selected and #tag.screen.tags > 1 then
+        awful.tag.setscreen(screen, tag)
+      end
       tag:view_only()
       awful.screen.focus(tag.screen)
     end
