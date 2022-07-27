@@ -1,6 +1,7 @@
 local awful = require('awful')
 local top_panel = require('layout.top-panel')
 local control_center = require('layout.control-center')
+-- luacheck: globals screen
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
@@ -10,7 +11,7 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 
 -- Hide bars when app go fullscreen
-function updateBarsVisibility()
+local function updateBarsVisibility()
   for s in screen do
     if s.selected_tag then
       local fullscreen = s.selected_tag.fullscreenMode

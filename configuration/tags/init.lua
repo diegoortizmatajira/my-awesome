@@ -11,16 +11,17 @@ local getDefaultScreen = function(preferredScreen)
 end
 
 local tags = {
-  {name = 1, defaultApp = apps.default.browser, screen = 1, layout = awful.layout.suit.max},
-  {name = 2, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
-  {name = 3, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
-  {name = 4, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
-  {name = 5, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
-  {name = 6, defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
-  {name = 7, defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
-  {name = 8, defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
-  {name = 9, defaultApp = apps.default.rofi, screen = 3, layout = awful.layout.suit.tile.left},
-  {name = 0, defaultApp = apps.default.terminal, screen = 1, layout = awful.layout.suit.max}
+  {name = 1, icon = '\u{f104}', defaultApp = apps.default.browser, screen = 1, layout = awful.layout.suit.max},
+  {name = 2, icon = '\u{f104}', defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 3, icon = '\u{f104}', defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 4, icon = '', defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 5, icon = '', defaultApp = apps.default.rofi, screen = 1, layout = awful.layout.suit.max},
+  {name = 6, icon = '', defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
+  {name = 7, icon = '\u{f104}', defaultApp = apps.default.rofi, screen = 2, layout = awful.layout.suit.max},
+  {name = 8, icon = '\u{f104}', defaultApp = apps.default.music, screen = 2, layout = awful.layout.suit.max},
+  {name = 9, icon = '\u{f104}', defaultApp = apps.default.social, screen = 2, layout = awful.layout.suit.tile.left},
+  {name = 0, icon = '\u{f104}', defaultApp = apps.default.terminal, screen = 1, layout = awful.layout.suit.max},
+  {name = 'Last', icon = '', defaultApp = apps.default.rofi, screen = 3, layout = awful.layout.suit.max}
 }
 
 awful.layout.layouts = {

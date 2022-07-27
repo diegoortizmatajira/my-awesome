@@ -7,7 +7,7 @@ return {
     rofi = rofi_command,
     lock = 'custom-lock',
     quake = 'kitty',
-    screenshot = 'flameshot screen -c',
+    screenshot = 'flameshot launcher',
     region_screenshot = 'flameshot gui -c',
     ocr_screenshot = 'custom-ocr',
     delayed_screenshot = 'flameshot screen -c -d 5000',
