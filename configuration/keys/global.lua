@@ -1,5 +1,6 @@
 local awful = require('awful')
-local beautiful = require('beautiful')
+local mappings = require('configuration.mappings')
+local mapkey = mappings.mapkey
 local modalbind = require("configuration.keys.modal-binding")
 modalbind.init()
 
@@ -122,25 +123,30 @@ local layout_modify_map = {
 
 -- Key bindings
 local globalKeys = awful.util.table.join( -- Awesome
-  awful.key({modkey, 'Control'}, 'r', awesome.restart, {description = 'Reload Awesome', group = 'Awesome'}),
-  awful.key({modkey, 'Control'}, 'q', awesome.quit, {description = 'Quit Awesome', group = 'Awesome'}), -- Hotkeys
-  awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
-  awful.key({modkey}, 'a', spawn('ibus emoji', true), {description = 'Emoji Picker', group = 'Hotkeys'}),
-  awful.key({modkey}, 'g', spawn('custom-nordvpn-menu'), {description = 'Nordvpn options', group = 'Hotkeys'}),
-  awful.key({modkey}, 'p', spawn('custom-layout'), {description = 'Display Layout options', group = 'Hotkeys'}),
-  awful.key({modkey}, 'Delete', spawn('custom-askpoweroptions'), {description = 'Shutdown options', group = 'Hotkeys'}),
-  awful.key({modkey, 'Shift'}, 'l', spawn(apps.default.lock), {description = 'Lock the screen', group = 'Hotkeys'}),
-  awful.key({modkey}, 'v', spawn('custom-clipboard'), {description = 'Recent clipboard', group = 'Hotkeys'}),
-  awful.key({modkey}, 'd', toggle_minimize_all(true), {description = 'Show desktop', group = 'Hotkeys'}),
-  awful.key({modkey, 'Shift'}, 'd', spawn('custom-wallpaper'), {description = 'Next wallpaper', group = 'Hotkeys'}), -- Window Focus
-  awful.key({modkey}, 'j', focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
-  awful.key({modkey}, 'k', focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
-  awful.key({modkey}, 'l', focus_client('right'), {description = 'Focus window on the right', group = 'Windows'}),
-  awful.key({modkey}, 'h', focus_client('left'), {description = 'Focus window on the left', group = 'Windows'}),
-  awful.key({modkey}, 'Down', focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
-  awful.key({modkey}, 'Up', focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
-  awful.key({modkey}, 'Right', focus_client('right'), {description = 'Focus window on the right', group = 'Windows'}),
-  awful.key({modkey}, 'Left', focus_client('left'), {description = 'Focus window on the left', group = 'Windows'}),
+  mapkey(mappings.awesome_restart, awesome.restart, {description = 'Reload Awesome', group = 'Awesome'}),
+  mapkey(mappings.awesome_quit, awesome.quit, {description = 'Quit Awesome', group = 'Awesome'}), -- Hotkeys
+  mapkey(mappings.awesome_help, hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
+  mapkey(mappings.app_emoji_picker, spawn('ibus emoji', true), {description = 'Emoji Picker', group = 'Hotkeys'}),
+  mapkey(mappings.app_nordvpn, spawn('custom-nordvpn-menu'), {description = 'Nordvpn options', group = 'Hotkeys'}),
+  mapkey(mappings.system_display_layout, spawn('custom-layout'),
+    {description = 'Display Layout options', group = 'Hotkeys'}),
+  mapkey(mappings.system_power_options, spawn('custom-askpoweroptions'),
+    {description = 'Shutdown options', group = 'Hotkeys'}),
+  mapkey(mappings.system_lock, spawn(apps.default.lock), {description = 'Lock the screen', group = 'Hotkeys'}),
+  mapkey(mappings.system_clipboard, spawn('custom-clipboard'), {description = 'Recent clipboard', group = 'Hotkeys'}),
+  mapkey(mappings.system_show_desktop, toggle_minimize_all(true), {description = 'Show desktop', group = 'Hotkeys'}),
+  mapkey(mappings.system_next_wallpaper, spawn('custom-wallpaper'), {description = 'Next wallpaper', group = 'Hotkeys'}), -- Window Focus
+  mapkey(mappings.client_select_below, focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
+  mapkey(mappings.client_select_above, focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
+  mapkey(mappings.client_select_right, focus_client('right'),
+    {description = 'Focus window on the right', group = 'Windows'}), mapkey(mappings.client_select_left,
+    focus_client('left'), {description = 'Focus window on the left', group = 'Windows'}), mapkey(
+    mappings.client_select_below_alt, focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
+  mapkey(mappings.client_select_above_alt, focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
+  mapkey(mappings.client_select_right_alt, focus_client('right'),
+    {description = 'Focus window on the right', group = 'Windows'}),
+  mapkey(mappings.client_select_left_alt, focus_client('left'),
+    {description = 'Focus window on the left', group = 'Windows'}),
   awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'Jump to urgent window', group = 'Windows'}),
   awful.key({altkey}, 'Tab', spawn('custom-alttab'), {description = 'Switch to other window', group = 'Windows'}), -- Navigate workspaces
   awful.key({altkey, 'Control'}, 'Tab', spawn('custom-window-switch-local'),
