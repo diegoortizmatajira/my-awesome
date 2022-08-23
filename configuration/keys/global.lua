@@ -10,7 +10,6 @@ require('awful.autofocus')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 
 local modkey = require('configuration.keys.mod').modKey
-local altkey = require('configuration.keys.mod').altKey
 local apps = require('configuration.apps')
 local tags = require('configuration.tags')
 
@@ -139,62 +138,68 @@ local globalKeys = awful.util.table.join( -- Awesome
   mapkey(mappings.client_select_below, focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
   mapkey(mappings.client_select_above, focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
   mapkey(mappings.client_select_right, focus_client('right'),
-    {description = 'Focus window on the right', group = 'Windows'}), mapkey(mappings.client_select_left,
-    focus_client('left'), {description = 'Focus window on the left', group = 'Windows'}), mapkey(
-    mappings.client_select_below_alt, focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
-  mapkey(mappings.client_select_above_alt, focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
+    {description = 'Focus window on the right', group = 'Windows'}), --
+  mapkey(mappings.client_select_left, focus_client('left'),
+    {description = 'Focus window on the left', group = 'Windows'}), mapkey(mappings.client_select_below_alt,
+    focus_client('down'), {description = 'Focus window below', group = 'Windows'}), mapkey(
+    mappings.client_select_above_alt, focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
   mapkey(mappings.client_select_right_alt, focus_client('right'),
     {description = 'Focus window on the right', group = 'Windows'}),
   mapkey(mappings.client_select_left_alt, focus_client('left'),
     {description = 'Focus window on the left', group = 'Windows'}),
-  awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'Jump to urgent window', group = 'Windows'}),
-  awful.key({altkey}, 'Tab', spawn('custom-alttab'), {description = 'Switch to other window', group = 'Windows'}), -- Navigate workspaces
-  awful.key({altkey, 'Control'}, 'Tab', spawn('custom-window-switch-local'),
-    {description = 'Switch to other window in current tag', group = 'Windows'}), -- Navigate workspaces
-  awful.key({modkey, 'Control'}, 'j', awful.tag.viewprev,
-    {description = 'Go to previous workspace', group = 'Workspaces'}), awful.key({modkey, 'Control'}, 'k',
-    awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
-  awful.key({modkey, 'Control'}, 'Down', awful.tag.viewprev,
-    {description = 'Go to previous workspace', group = 'Workspaces'}), awful.key({modkey, 'Control'}, 'Up',
-    awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}), awful.key({modkey}, 'Tab',
-    awful.tag.history.restore, {description = 'Go to last used workspace', group = 'Workspaces'}), -- Applications
-  awful.key({modkey}, 's', spawn('custom-launcher'), {description = 'Application Launcher', group = 'Applications'}),
-  awful.key({modkey, 'Control'}, 'Escape', spawn('custom-launcher'),
+  mapkey(mappings.client_select_urgent, awful.client.urgent.jumpto,
+    {description = 'Jump to urgent window', group = 'Windows'}), --
+  mapkey(mappings.client_switch_fwd, spawn('custom-alttab'), {description = 'Switch to other window', group = 'Windows'}), -- Navigate workspaces
+  mapkey(mappings.workspace_previous, awful.tag.viewprev,
+    {description = 'Go to previous workspace', group = 'Workspaces'}), --
+  mapkey(mappings.workspace_next, awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
+  mapkey(mappings.workspace_previous_alt, awful.tag.viewprev,
+    {description = 'Go to previous workspace', group = 'Workspaces'}), --
+  mapkey(mappings.workspace_next_alt, awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
+  mapkey(mappings.workspace_switch, awful.tag.history.restore,
+    {description = 'Go to last used workspace', group = 'Workspaces'}), -- Applications
+  mapkey(mappings.system_search, spawn('custom-launcher'),
     {description = 'Application Launcher', group = 'Applications'}),
-  awful.key({modkey}, 't', spawn(apps.default.editor), {description = 'Open a text editor', group = 'Applications'}),
-  awful.key({modkey}, 'b', spawn(apps.default.browser), {description = 'Open a browser', group = 'Applications'}),
-  awful.key({modkey}, 'x', spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
-  awful.key({modkey}, 'e', spawn(apps.default.files), {description = 'File Explorer', group = 'Applications'}),
-  awful.key({modkey}, 'z', _G.toggle_quake, {description = 'Dropdown Terminal', group = 'Applications'}),
-  awful.key({modkey}, 'Return', spawn(awful.screen.focused().selected_tag.defaultApp),
+  mapkey(mappings.system_launcher, spawn('custom-launcher'),
+    {description = 'Application Launcher', group = 'Applications'}), --
+  mapkey(mappings.app_text_editor, spawn(apps.default.editor),
+    {description = 'Open a text editor', group = 'Applications'}),
+  mapkey(mappings.app_browser, spawn(apps.default.browser), {description = 'Open a browser', group = 'Applications'}),
+  mapkey(mappings.app_terminal, spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
+  mapkey(mappings.app_file_explorer, spawn(apps.default.files), {description = 'File Explorer', group = 'Applications'}),
+  mapkey(mappings.app_floating_terminal, _G.toggle_quake, {description = 'Dropdown Terminal', group = 'Applications'}),
+  mapkey(mappings.app_workspace_default, spawn(awful.screen.focused().selected_tag.defaultApp),
     {description = 'Open default program for workspace', group = 'Applications'}), -- Screenshots
-  awful.key({'Shift'}, 'Print', spawn(apps.default.delayed_screenshot, true), {
+  mapkey(mappings.system_screenshot_delayed, spawn(apps.default.delayed_screenshot, true), {
     description = 'Take an screenshot of your active monitor 5 seconds later (clipboard)',
     group = 'screenshots (clipboard)'
-  }), awful.key({}, 'Print', spawn(apps.default.screenshot, true), {
+  }), --
+  mapkey(mappings.system_screenshot, spawn(apps.default.screenshot, true), {
     description = 'Take a screenshot of your active monitor and copy it to clipboard',
     group = 'screenshots (clipboard)'
-  }), awful.key({modkey, 'Shift'}, 'Print', spawn(apps.default.region_screenshot, true),
+  }), --
+  mapkey(mappings.system_screenshot_region, spawn(apps.default.region_screenshot, true),
     {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
-  awful.key({modkey, 'Shift'}, 's', spawn(apps.default.region_screenshot, true),
+  mapkey(mappings.system_screenshot_region_alt, spawn(apps.default.region_screenshot, true),
     {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
-  awful.key({altkey}, 'Print', spawn(apps.default.ocr_screenshot, true),
+  mapkey(mappings.system_screenshot_ocr, spawn(apps.default.ocr_screenshot, true),
     {description = 'Mark an area and OCR its content to your clipboard', group = 'screenshots (clipboard)'}),
   -- Layout: Master Size
-  awful.key({modkey}, 'r', function()
+  mapkey(mappings.workspace_resize_layout, function()
     modalbind.grab({keymap = layout_modify_map, name = 'Modify layout', stay_in_mode = true})
   end, {description = 'Resizes the current layout', group = 'Modes'}), -- Layout: Move tags to different screen
-  awful.key({modkey, 'Shift'}, 'r', function()
+  mapkey(mappings.workspace_relocate, function()
     modalbind.grab({keymap = screen_move_map, name = 'Move current tag to screen', stay_in_mode = true})
-  end, {description = 'Relocate current Tag', group = 'Modes'}), awful.key({modkey}, 'space', function()
+  end, {description = 'Relocate current Tag', group = 'Modes'}), --
+  mapkey(mappings.workspace_next_layout, function()
     awful.layout.inc(1)
   end, {description = 'Select next Layout', group = 'Layout Distribution'}),
-  awful.key({modkey, 'Shift'}, 'space', function()
+  mapkey(mappings.workspace_prev_layout, function()
     awful.layout.inc(-1)
   end, {description = 'Select previous Layout', group = 'Layout Distribution'}),
-  awful.key({modkey, 'Shift'}, 'Prior', toggle_minimize_all(false),
-    {description = 'Restore all windows', group = 'Windows'}), awful.key({modkey, 'Shift'}, 'Next',
-    toggle_minimize_all(true), {description = 'Restore minimized', group = 'Windows'}), -- Dropdown application
+  mapkey(mappings.client_restore_all, toggle_minimize_all(false),
+    {description = 'Restore all windows', group = 'Windows'}), --
+  mapkey(mappings.client_minimize_all, toggle_minimize_all(true), {description = 'Restore minimized', group = 'Windows'}), -- Dropdown application
   -- Brightness
   awful.key({}, 'XF86MonBrightnessUp', spawn('xbacklight -inc 10')),
   awful.key({}, 'XF86MonBrightnessDown', spawn('xbacklight -dec 10')), -- ALSA volume control
@@ -203,10 +208,12 @@ local globalKeys = awful.util.table.join( -- Awesome
   awful.key({}, 'XF86AudioMute', spawn('amixer -D pulse set Master 1+ toggle')),
   awful.key({}, 'XF86AudioStop', spawn('playerctl stop')),
   awful.key({}, 'XF86AudioPlay', spawn('playerctl play-pause')),
-  awful.key({}, 'XF86AudioPause', spawn('playerctl pause')), awful.key({}, 'XF86AudioNext', spawn('playerctl next')),
+  awful.key({}, 'XF86AudioPause', spawn('playerctl pause')), --
+  awful.key({}, 'XF86AudioNext', spawn('playerctl next')), --
   awful.key({}, 'XF86AudioPrev', spawn('playerctl prev')),
   awful.key({}, 'XF86PowerDown', spawn('custom-askpoweroptions')),
-  awful.key({}, 'XF86PowerOff', spawn('custom-askpoweroptions')), awful.key({modkey}, 'n', function()
+  awful.key({}, 'XF86PowerOff', spawn('custom-askpoweroptions')), --
+  mapkey(mappings.workspace_find_empty, function()
     local screen = awful.screen.focused()
     for _, tag in ipairs(tags) do
       if #tag:clients() == 0 and not tag.selected then
@@ -288,14 +295,13 @@ for i = 1, 10 do
     descr_move = {description = 'Move focused window to workspace #', group = 'Workspaces'}
 
   end
-  local num_pad_i = i % 10
   globalKeys = awful.util.table.join(globalKeys, -- View tag only.
-  awful.key({modkey}, '#' .. i + 9, Change_to_tag_i(i), descr_view), -- Toggle tag display.
-  awful.key({modkey}, '#' .. np_map[i], Change_to_tag_i(i), descr_view), -- Toggle tag display.
-  awful.key({modkey, 'Control'}, '#' .. i + 9, Toggle_tag_i(i), descr_toggle), -- Move client to tag.
-  awful.key({modkey, 'Control'}, '#' .. np_map[i], Toggle_tag_i(i), descr_toggle), -- Move client to tag.
-  awful.key({modkey, 'Shift'}, '#' .. i + 9, Move_to_tag_i(i), descr_move),
-    awful.key({modkey, 'Shift'}, '#' .. np_map[i], Move_to_tag_i(i), descr_move))
+  awful.key(mappings.prefix_workspace_goto, '#' .. i + 9, Change_to_tag_i(i), descr_view), -- Toggle tag display.
+  awful.key(mappings.prefix_workspace_goto, '#' .. np_map[i], Change_to_tag_i(i), descr_view), -- Toggle tag display.
+  awful.key(mappings.prefix_workspace_toggle, '#' .. i + 9, Toggle_tag_i(i), descr_toggle), -- Move client to tag.
+  awful.key(mappings.prefix_workspace_toggle, '#' .. np_map[i], Toggle_tag_i(i), descr_toggle), -- Move client to tag.
+  awful.key(mappings.prefix_workspace_moveto, '#' .. i + 9, Move_to_tag_i(i), descr_move), --
+  awful.key(mappings.prefix_workspace_moveto, '#' .. np_map[i], Move_to_tag_i(i), descr_move))
 end
 
 return globalKeys
