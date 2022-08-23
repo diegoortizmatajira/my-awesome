@@ -149,7 +149,7 @@ local globalKeys = awful.util.table.join( -- Awesome
     {description = 'Focus window on the left', group = 'Windows'}),
   mapkey(mappings.client_select_urgent, awful.client.urgent.jumpto,
     {description = 'Jump to urgent window', group = 'Windows'}), --
-  mapkey(mappings.client_switch_fwd, spawn('custom-alttab'), {description = 'Switch to other window', group = 'Windows'}), -- Navigate workspaces
+  mapkey(mappings.client_switch, spawn('custom-alttab'), {description = 'Switch to other window', group = 'Windows'}), -- Navigate workspaces
   mapkey(mappings.workspace_previous, awful.tag.viewprev,
     {description = 'Go to previous workspace', group = 'Workspaces'}), --
   mapkey(mappings.workspace_next, awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
