@@ -9,6 +9,7 @@ return {
   client_swap_master = {{modkey}, 'm'},
   client_full_screen = {{modkey}, 'F11'},
   client_close = {{altkey}, 'F4'},
+  client_close_alt = {{modkey}, 'w'},
   client_maximize = {{modkey}, 'Prior'},
   client_minimize = {{modkey}, 'Next'},
   client_restore_all = {{modkey, 'Shift'}, 'Prior'},
