@@ -11,7 +11,7 @@ return {
     region_screenshot = 'flameshot gui -c',
     ocr_screenshot = 'custom-ocr',
     delayed_screenshot = 'flameshot screen -c -d 5000',
-    browser = 'firefox',
+    browser = 'firefox-developer-edition',
     editor = 'subl', -- gui text editor
     social = rofi_command,
     game = rofi_command,

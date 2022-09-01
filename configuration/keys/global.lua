@@ -125,16 +125,7 @@ local globalKeys = awful.util.table.join( -- Awesome
   mapkey(mappings.awesome_restart, awesome.restart, {description = 'Reload Awesome', group = 'Awesome'}),
   mapkey(mappings.awesome_quit, awesome.quit, {description = 'Quit Awesome', group = 'Awesome'}), -- Hotkeys
   mapkey(mappings.awesome_help, hotkeys_popup.show_help, {description = 'Show help', group = 'Hotkeys'}),
-  mapkey(mappings.app_emoji_picker, spawn('ibus emoji', true), {description = 'Emoji Picker', group = 'Hotkeys'}),
-  mapkey(mappings.app_nordvpn, spawn('custom-nordvpn-menu'), {description = 'Nordvpn options', group = 'Hotkeys'}),
-  mapkey(mappings.system_display_layout, spawn('custom-layout'),
-    {description = 'Display Layout options', group = 'Hotkeys'}),
-  mapkey(mappings.system_power_options, spawn('custom-askpoweroptions'),
-    {description = 'Shutdown options', group = 'Hotkeys'}),
-  mapkey(mappings.system_lock, spawn(apps.default.lock), {description = 'Lock the screen', group = 'Hotkeys'}),
-  mapkey(mappings.system_clipboard, spawn('custom-clipboard'), {description = 'Recent clipboard', group = 'Hotkeys'}),
   mapkey(mappings.system_show_desktop, toggle_minimize_all(true), {description = 'Show desktop', group = 'Hotkeys'}),
-  mapkey(mappings.system_next_wallpaper, spawn('custom-wallpaper'), {description = 'Next wallpaper', group = 'Hotkeys'}), -- Window Focus
   mapkey(mappings.client_select_below, focus_client('down'), {description = 'Focus window below', group = 'Windows'}),
   mapkey(mappings.client_select_above, focus_client('up'), {description = 'Focus window above', group = 'Windows'}),
   mapkey(mappings.client_select_right, focus_client('right'),
@@ -158,32 +149,8 @@ local globalKeys = awful.util.table.join( -- Awesome
   mapkey(mappings.workspace_next_alt, awful.tag.viewnext, {description = 'Go to next workspace', group = 'Workspaces'}),
   mapkey(mappings.workspace_switch, awful.tag.history.restore,
     {description = 'Go to last used workspace', group = 'Workspaces'}), -- Applications
-  mapkey(mappings.system_search, spawn('custom-launcher'),
-    {description = 'Application Launcher', group = 'Applications'}),
-  mapkey(mappings.system_launcher, spawn('custom-launcher'),
-    {description = 'Application Launcher', group = 'Applications'}), --
-  mapkey(mappings.app_text_editor, spawn(apps.default.editor),
-    {description = 'Open a text editor', group = 'Applications'}),
-  mapkey(mappings.app_browser, spawn(apps.default.browser), {description = 'Open a browser', group = 'Applications'}),
-  mapkey(mappings.app_terminal, spawn(apps.default.terminal), {description = 'Open a terminal', group = 'Applications'}),
-  mapkey(mappings.app_file_explorer, spawn(apps.default.files), {description = 'File Explorer', group = 'Applications'}),
-  mapkey(mappings.app_floating_terminal, _G.toggle_quake, {description = 'Dropdown Terminal', group = 'Applications'}),
   mapkey(mappings.app_workspace_default, spawn(awful.screen.focused().selected_tag.defaultApp),
     {description = 'Open default program for workspace', group = 'Applications'}), -- Screenshots
-  mapkey(mappings.system_screenshot_delayed, spawn(apps.default.delayed_screenshot, true), {
-    description = 'Take an screenshot of your active monitor 5 seconds later (clipboard)',
-    group = 'screenshots (clipboard)'
-  }), --
-  mapkey(mappings.system_screenshot, spawn(apps.default.screenshot, true), {
-    description = 'Take a screenshot of your active monitor and copy it to clipboard',
-    group = 'screenshots (clipboard)'
-  }), --
-  mapkey(mappings.system_screenshot_region, spawn(apps.default.region_screenshot, true),
-    {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
-  mapkey(mappings.system_screenshot_region_alt, spawn(apps.default.region_screenshot, true),
-    {description = 'Mark an area and screenshot it to your clipboard', group = 'screenshots (clipboard)'}),
-  mapkey(mappings.system_screenshot_ocr, spawn(apps.default.ocr_screenshot, true),
-    {description = 'Mark an area and OCR its content to your clipboard', group = 'screenshots (clipboard)'}),
   -- Layout: Master Size
   mapkey(mappings.workspace_resize_layout, function()
     modalbind.grab({keymap = layout_modify_map, name = 'Modify layout', stay_in_mode = true})

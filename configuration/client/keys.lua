@@ -29,6 +29,8 @@ end, {description = "Next window in tag", group = "Windows"}), mapkey(mappings.c
 end, {description = "Minimize", group = "Windows"}), mapkey(mappings.client_maximize, function(c)
   c.maximized = not c.maximized
   c:raise()
-end, {description = "Maximize", group = "Windows"}))
+end, {description = "Maximize", group = "Windows"}), mapkey(mappings.client_float, function(c)
+  c.floating = not c.floating
+end, {description = "Make floating", group = "Windows"}))
 
 return clientKeys
