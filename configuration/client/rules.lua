@@ -111,5 +111,9 @@ awful.rules.rules = {
       end,
       skip_decoration = true
     }
+  },
+  {
+    rule_any = {type = {"desktop"}},
+    properties = {hidden = true, sticky = true, border_width = 0, skip_taskbar = true, keys = {}}
   }
 }
