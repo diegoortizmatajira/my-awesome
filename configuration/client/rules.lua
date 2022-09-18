@@ -113,6 +113,21 @@ awful.rules.rules = {
     }
   },
   {
+    rule = {class = 'Xfce4-display-settings'},
+    properties = {
+      placement = awful.placement.centered,
+      ontop = true,
+      floating = true,
+      drawBackdrop = true,
+      shape = function()
+        return function(cr, w, h)
+          gears.shape.rounded_rect(cr, w, h, 8)
+        end
+      end,
+      skip_decoration = true
+    }
+  },
+  {
     rule_any = {type = {"desktop"}},
     properties = {hidden = true, sticky = true, border_width = 0, skip_taskbar = true, keys = {}}
   }
