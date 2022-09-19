@@ -1,4 +1,3 @@
--- luacheck: globals root
 
 local awful = require('awful')
 require('awful.autofocus')
@@ -17,19 +16,14 @@ require('module.auto-start')
 require('module.decorate-client')
 -- Backdrop causes bugs on some gtk3 applications
 -- require('module.backdrop')
-require('module.exit-screen')
-require('module.quake-terminal')
 
 -- Setup all configurations
 require('configuration.client')
 require('configuration.tags')
 
 
+-- luacheck: globals root
 root.keys(require('configuration.keys.global'))
-
--- {{{ Screen
--- Reset wallpaper when a screen's geometry changes (e.g. different resolution)
--- screen.connect_signal( "property::geometry", function(s) beautiful.wallpaper.maximized( beautiful.wallpaper, s, beautiful.wallpapers) end )
 
 -- Signal function to execute when a new client appears.
 client.connect_signal('manage', function(c)
@@ -53,16 +47,6 @@ client.connect_signal('manage', function(c)
         c.icon = img._native
     end
 end)
-
--- Enable sloppy focus, so that focus follows mouse.
---[[
-_G.client.connect_signal(
-'mouse::enter',
-function(c)
-c:emit_signal('request::activate', 'mouse_enter', {raise = true})
-end
-)
---]]
 
 -- Make the focused window have a glowing border
 client.connect_signal('focus', function(c)

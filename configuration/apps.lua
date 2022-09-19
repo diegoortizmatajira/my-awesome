@@ -6,7 +6,6 @@ return {
     terminal = 'kitty',
     rofi = rofi_command,
     lock = 'custom-lock',
-    quake = 'kitty',
     screenshot = 'flameshot launcher',
     region_screenshot = 'flameshot gui -c',
     ocr_screenshot = 'custom-ocr',

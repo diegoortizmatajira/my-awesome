@@ -1,15 +1,15 @@
-local filesystem = require('gears.filesystem')
-local mat_colors = require('theme.mat-colors')
-local theme_dir = filesystem.get_configuration_dir() .. '/theme'
-local gears = require('gears')
-local dpi = require('beautiful').xresources.apply_dpi
+local filesystem = require("gears.filesystem")
+local mat_colors = require("theme.mat-colors")
+local theme_dir = filesystem.get_configuration_dir() .. "/theme"
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
 local theme = {}
-local mono_font = 'Jetbrains Mono Bold 9'
+local mono_font = "Jetbrains Mono Bold 9"
 -- local serif_font = 'SF Pro Display 9'
 local serif_font = mono_font
 -- local symbol_font = 'Font Awesome 5 Pro Regular 9'
 local symbol_font = mono_font
-theme.icons = theme_dir .. '/icons/'
+theme.icons = theme_dir .. "/icons/"
 theme.font = serif_font
 
 -- Colors Pallets
@@ -22,109 +22,104 @@ theme.accent = mat_colors.orange
 
 -- Background
 theme.background = mat_colors.background
-theme.panel_background = theme.background.hue_800 .. 'AA'
-local transparent = '#00000000'
+theme.panel_background = theme.background.hue_800 .. "AA"
+local transparent = "#00000000"
 
-local awesome_overrides = function(theme)
-  theme.dir = os.getenv('HOME') .. '/.config/awesome/theme'
-  theme.icons = theme.dir .. '/icons/'
-  theme.wallpaper = '#e0e0e0'
-  theme.font = serif_font
-  theme.title_font = serif_font
+local awesome_overrides = function(overrided_theme)
+	overrided_theme.dir = os.getenv("HOME") .. "/.config/awesome/theme"
+	overrided_theme.icons = overrided_theme.dir .. "/icons/"
+	overrided_theme.wallpaper = "#e0e0e0"
+	overrided_theme.font = serif_font
+	overrided_theme.title_font = serif_font
 
-  theme.fg_normal = '#ffffffde'
+	overrided_theme.fg_normal = "#ffffffde"
 
-  theme.fg_focus = '#e4e4e4'
-  theme.fg_urgent = '#CC9393'
-  theme.bat_fg_critical = '#232323'
+	overrided_theme.fg_focus = "#e4e4e4"
+	overrided_theme.fg_urgent = "#CC9393"
+	overrided_theme.bat_fg_critical = "#232323"
 
-  theme.bg_normal = theme.panel_background
-  theme.bg_focus = '#5a5a5a'
-  theme.bg_urgent = '#3F3F3F'
-  theme.bg_systray = theme.background.hue_800
+	overrided_theme.bg_normal = overrided_theme.panel_background
+	overrided_theme.bg_focus = "#5a5a5a"
+	overrided_theme.bg_urgent = "#3F3F3F"
+	overrided_theme.bg_systray = overrided_theme.background.hue_800
 
-  -- Borders
+	-- Borders
 
-  theme.border_width = dpi(2)
-  theme.border_normal = theme.background.hue_800
-  theme.border_focus = theme.primary.hue_300
-  theme.border_marked = '#CC9393'
+	overrided_theme.border_width = dpi(1)
+	overrided_theme.border_focus = overrided_theme.primary.hue_300 .. "44"
+	overrided_theme.border_normal = overrided_theme.background.hue_700 .. "AA"
+	overrided_theme.border_marked = "#CC9393"
 
-  -- Menu
+	-- Menu
 
-  theme.menu_height = dpi(16)
-  theme.menu_width = dpi(160)
+	overrided_theme.menu_height = dpi(16)
+	overrided_theme.menu_width = dpi(160)
 
-  -- Tooltips
-  theme.tooltip_bg = '#232323'
-  -- theme.tooltip_border_color = '#232323'
-  theme.tooltip_border_width = 0
-  theme.tooltip_shape = function(cr, w, h)
-    gears.shape.rounded_rect(cr, w, h, dpi(3))
-  end
+	-- Tooltips
+	overrided_theme.tooltip_bg = "#232323"
+	-- theme.tooltip_border_color = '#232323'
+	overrided_theme.tooltip_border_width = 0
+	overrided_theme.tooltip_shape = function(cr, w, h)
+		gears.shape.rounded_rect(cr, w, h, dpi(3))
+	end
 
-  -- Layout
+	-- Layout
 
-  theme.layout_max = theme.icons .. 'layouts/max.png'
-  theme.layout_tile = theme.icons .. 'layouts/tile.png'
-  theme.layout_tileleft = theme.icons .. 'layouts/tileleft.png'
-  theme.layout_tiletop = theme.icons .. 'layouts/tiletop.png'
-  theme.layout_tilebottom = theme.icons .. 'layouts/tilebottom.png'
-  theme.layout_floating = theme.icons .. 'layouts/floating.png'
-  theme.layout_cornernw = theme.icons .. 'layouts/cornernw.png'
+	overrided_theme.layout_max = overrided_theme.icons .. "layouts/max.png"
+	overrided_theme.layout_tile = overrided_theme.icons .. "layouts/tile.png"
+	overrided_theme.layout_tileleft = overrided_theme.icons .. "layouts/tileleft.png"
+	overrided_theme.layout_tiletop = overrided_theme.icons .. "layouts/tiletop.png"
+	overrided_theme.layout_tilebottom = overrided_theme.icons .. "layouts/tilebottom.png"
+	overrided_theme.layout_floating = overrided_theme.icons .. "layouts/floating.png"
+	overrided_theme.layout_cornernw = overrided_theme.icons .. "layouts/cornernw.png"
 
-  -- Taglist
+	-- Taglist
 
-  theme.taglist_font = symbol_font
-  theme.taglist_bg_empty = transparent
-  theme.taglist_bg_occupied = transparent
-  theme.taglist_bg_urgent = {
-    type = 'linear',
-    from = {0, 0},
-    to = {0, dpi(40)},
-    stops = {
-      {0, theme.accent.hue_600},
-      {0.07, theme.accent.hue_600},
-      {0.08, theme.background.hue_600 .. '66'},
-      {0.95, theme.accent.hue_300 .. 'FF'}
-    }
-  }
-  theme.taglist_bg_focus = {
-    type = 'linear',
-    from = {0, 0},
-    to = {0, dpi(40)},
-    stops = {
-      {0, theme.accent.hue_600},
-      {0.07, theme.accent.hue_600},
-      {0.08, theme.background.hue_600 .. '66'},
-      {0.95, theme.background.hue_600 .. 'FF'}
-    }
-  }
-  -- Tasklist
+	overrided_theme.taglist_font = symbol_font
+	overrided_theme.taglist_bg_empty = transparent
+	overrided_theme.taglist_bg_occupied = transparent
+	overrided_theme.taglist_bg_urgent = {
+		type = "linear",
+		from = { 0, 0 },
+		to = { 0, dpi(40) },
+		stops = {
+			{ 0, overrided_theme.accent.hue_600 },
+			{ 0.07, overrided_theme.accent.hue_600 },
+			{ 0.08, overrided_theme.background.hue_600 .. "66" },
+			{ 0.95, overrided_theme.accent.hue_300 .. "FF" },
+		},
+	}
+	overrided_theme.taglist_bg_focus = {
+		type = "linear",
+		from = { 0, 0 },
+		to = { 0, dpi(40) },
+		stops = {
+			{ 0, overrided_theme.accent.hue_600 },
+			{ 0.07, overrided_theme.accent.hue_600 },
+			{ 0.08, overrided_theme.background.hue_600 .. "66" },
+			{ 0.95, overrided_theme.background.hue_600 .. "FF" },
+		},
+	}
+	-- Tasklist
 
-  theme.tasklist_font = mono_font
-  theme.tasklist_bg_normal = transparent
-  theme.tasklist_bg_focus = {
-    type = 'linear',
-    from = {0, 0},
-    to = {0, dpi(40)},
-    stops = {
-      {0, theme.primary.hue_400},
-      {0.07, theme.primary.hue_400},
-      {0.08, theme.background.hue_600 .. '66'},
-      {0.95, theme.background.hue_600 .. 'FF'}
-    }
-  }
-  theme.tasklist_bg_urgent = theme.primary.hue_800
-  theme.tasklist_fg_focus = '#DDDDDD'
-  theme.tasklist_fg_urgent = theme.fg_normal
-  theme.tasklist_fg_normal = '#AAAAAA'
+	overrided_theme.tasklist_font = mono_font
+	overrided_theme.tasklist_bg_normal = transparent
+	overrided_theme.tasklist_bg_focus = {
+		type = "linear",
+		from = { 0, 0 },
+		to = { 0, dpi(40) },
+		stops = {
+			{ 0, overrided_theme.primary.hue_400 },
+			{ 0.07, overrided_theme.primary.hue_400 },
+			{ 0.08, overrided_theme.background.hue_600 .. "66" },
+			{ 0.95, overrided_theme.background.hue_600 .. "FF" },
+		},
+	}
+	overrided_theme.tasklist_bg_urgent = overrided_theme.primary.hue_800
+	overrided_theme.tasklist_fg_focus = "#DDDDDD"
+	overrided_theme.tasklist_fg_urgent = overrided_theme.fg_normal
+	overrided_theme.tasklist_fg_normal = "#AAAAAA"
 
-  theme.icon_theme = 'Papirus-Dark'
-
-  -- Client
-  theme.border_width = dpi(1)
-  theme.border_focus = theme.primary.hue_500 .. 'AA'
-  theme.border_normal = theme.background.hue_700 .. 'AA'
+	overrided_theme.icon_theme = "Papirus-Dark"
 end
-return {theme = theme, awesome_overrides = awesome_overrides}
+return { theme = theme, awesome_overrides = awesome_overrides }
