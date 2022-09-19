@@ -140,7 +140,7 @@ local function call_key_if_present(keymap, key, args, use_lower)
 	end
 end
 
-function close_box(keymap, args)
+local function close_box(keymap, args)
 	call_key_if_present(keymap, "onClose", args)
 	keygrabber.stop()
 	nesting = 0
@@ -194,12 +194,12 @@ function modalbind.grab(options)
 	end
 	call_key_if_present(keymap, "onOpen", args, use_lower)
 
-	keygrabber.run(function(mod, key, event)
+	keygrabber.run(function(_, key, event)
 		if event == "release" then
 			return true
 		end
 
-		mapping = mapping_for(keymap, key, use_lower)
+		local mapping = mapping_for(keymap, key, use_lower)
 		if mapping then
 			if mapping[2] == close_box or mapping[2] == modalbind.close_box then
 				close_box(keymap, args)
