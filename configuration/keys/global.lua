@@ -146,26 +146,6 @@ local globalKeys = awful.util.table.join( -- Awesome
 		{ description = "Focus window on the left", group = "Windows" }
 	),
 	mapkey(
-		mappings.client_select_below_alt,
-		focus_client("down"),
-		{ description = "Focus window below", group = "Windows" }
-	),
-	mapkey(
-		mappings.client_select_above_alt,
-		focus_client("up"),
-		{ description = "Focus window above", group = "Windows" }
-	),
-	mapkey(
-		mappings.client_select_right_alt,
-		focus_client("right"),
-		{ description = "Focus window on the right", group = "Windows" }
-	),
-	mapkey(
-		mappings.client_select_left_alt,
-		focus_client("left"),
-		{ description = "Focus window on the left", group = "Windows" }
-	),
-	mapkey(
 		mappings.client_select_urgent,
 		awful.client.urgent.jumpto,
 		{ description = "Jump to urgent window", group = "Windows" }
@@ -180,14 +160,8 @@ local globalKeys = awful.util.table.join( -- Awesome
 		awful.tag.viewprev,
 		{ description = "Go to previous workspace", group = "Workspaces" }
 	), --
-	mapkey(mappings.workspace_next, awful.tag.viewnext, { description = "Go to next workspace", group = "Workspaces" }),
 	mapkey(
-		mappings.workspace_previous_alt,
-		awful.tag.viewprev,
-		{ description = "Go to previous workspace", group = "Workspaces" }
-	), --
-	mapkey(
-		mappings.workspace_next_alt,
+		mappings.workspace_next, --
 		awful.tag.viewnext,
 		{ description = "Go to next workspace", group = "Workspaces" }
 	),

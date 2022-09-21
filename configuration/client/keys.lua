@@ -14,9 +14,6 @@ local clientKeys = awful.util.table.join(
 	mapkey(mappings.client_close, function(c)
 		c:kill()
 	end, { description = "Close Window", group = "Windows" }),
-	mapkey(mappings.client_close_alt, function(c)
-		c:kill()
-	end, { description = "Close Window", group = "Windows" }),
 	mapkey(mappings.client_select_prev, function(_)
 		local selection = awful.client.next(-1)
 		if selection then
