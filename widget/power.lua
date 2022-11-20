@@ -15,7 +15,7 @@ local function Power(_, color)
     }
     local layoutBox = clickable_container(custom_widget)
     layoutBox:buttons(awful.util.table.join(awful.button({}, 1, function()
-        awful.spawn('custom-askpoweroptions')
+        awful.spawn('xfce4-session-logout')
     end)))
     return layoutBox
 end
