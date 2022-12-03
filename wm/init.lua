@@ -75,7 +75,6 @@ tag.connect_signal("property::selected", function(_)
 	ui.updateBarsVisibility()
 end)
 
-tag.connect_signal("property::layout", workspaces.smart_layout_gaps_handler)
 
 client.connect_signal("property::fullscreen", function(c)
 	c.screen.selected_tag.fullscreenMode = c.fullscreen

@@ -19,7 +19,7 @@ require("module.decorate-client")
 
 -- Setup all configurations
 require("configuration.client")
-require("configuration.tags")
+require("wm.workspaces")
 
 -- luacheck: globals root
 root.keys(require("configuration.keys.global"))

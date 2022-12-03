@@ -119,8 +119,9 @@ local function smart_layout_gaps_handler(t)
 	end
 end
 
+local taglist
+
 local function setup()
-	local taglist
 	if taglist == nil or #taglist == 0 then
 		taglist = {}
 		for _, tag in ipairs(workspace_tags) do
@@ -136,8 +137,18 @@ local function setup()
 			)
 		end
 	end
+	awful.screen.connect_for_each_screen(function(s)
+		for _, t in ipairs(taglist) do
+			if t.screen.index == s.index then
+				t:view_only()
+			end
+		end
+	end)
+	_G.tag.connect_signal("property::layout", smart_layout_gaps_handler)
 	state.set_tags(taglist)
 end
+
+setup()
 
 return {
 	to_left_screen_handler = move_to_screen_handler("left"),
@@ -152,5 +163,5 @@ return {
 	toggle_by_index_handler = toggle_by_index_handler,
 	assign_by_index_handler = assing_by_index_handler,
 	smart_layout_gaps_handler = smart_layout_gaps_handler,
-	setup = setup,
+	tag_list = taglist,
 }
