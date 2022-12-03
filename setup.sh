@@ -69,3 +69,7 @@ yay -Syu --needed --noconfirm
 yay -Sy ${base_desktop_environment[@]} --needed 
 
 yay -Rsc ${unneeded_packages[@]} 
+
+xfconf-query -c xfce4-session -p /sessions/Failsafe/Client0_Command -t string -sa xfsettingsd
+xfconf-query -c xfce4-session -p /sessions/Failsafe/Client1_Command -t string -sa awesome
+gsettings set  org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:'
