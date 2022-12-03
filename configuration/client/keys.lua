@@ -1,43 +1,52 @@
 local awful = require("awful")
+local input = require("utils.input")
+local mappings = require("settings.mappings")
+local windows = require("wm.windows")
 require("awful.autofocus")
-local mappings = require("configuration.mappings")
-local mapkey = mappings.mapkey
 
-local clientKeys = awful.util.table.join(
-	mapkey(mappings.client_swap_master, function(c)
-		c:swap(awful.client.getmaster())
-	end, { description = "Promote to master window", group = "Windows" }),
-	mapkey(mappings.client_full_screen, function(c)
-		c.fullscreen = not c.fullscreen
-		c:raise()
-	end, { description = "Toggle Fullscreen", group = "Windows" }),
-	mapkey(mappings.client_close, function(c)
-		c:kill()
-	end, { description = "Close Window", group = "Windows" }),
-	mapkey(mappings.client_select_prev, function(_)
-		local selection = awful.client.next(-1)
-		if selection then
-			client.focus = selection
-			selection:raise()
-		end
-	end, { description = "Previous window in tag", group = "Windows" }),
-	mapkey(mappings.client_select_next, function(_)
-		local selection = awful.client.next(1)
-		if selection then
-			client.focus = selection
-			selection:raise()
-		end
-	end, { description = "Next window in tag", group = "Windows" }),
-	mapkey(mappings.client_minimize, function(c)
-		c.minimized = true
-	end, { description = "Minimize", group = "Windows" }),
-	mapkey(mappings.client_maximize, function(c)
-		c.maximized = not c.maximized
-		c:raise()
-	end, { description = "Maximize", group = "Windows" }),
-	mapkey(mappings.client_float, function(c)
-		c.floating = not c.floating
-	end, { description = "Make floating", group = "Windows" })
+local map_handler = input.map_handler
+
+local client_keys = awful.util.table.join(
+	map_handler(
+		mappings.client_swap_master,
+		windows.promote_to_master_handler,
+		{ description = "Promote to master window", group = "Windows" }
+	),
+	map_handler(
+		mappings.client_full_screen,
+		windows.fullscreen_handler,
+		{ description = "Toggle Fullscreen", group = "Windows" }
+	),
+	map_handler(
+		mappings.client_close, --
+		windows.close_handler,
+		{ description = "Close Window", group = "Windows" }
+	),
+	map_handler(
+		mappings.client_select_prev,
+		windows.select_next_handler,
+		{ description = "Previous window in tag", group = "Windows" }
+	),
+	map_handler(
+		mappings.client_select_next,
+		windows.select_next_handler,
+		{ description = "Next window in tag", group = "Windows" }
+	),
+	map_handler(
+		mappings.client_minimize, --
+		windows.minimize_handler,
+		{ description = "Minimize", group = "Windows" }
+	),
+	map_handler(
+		mappings.client_maximize, --
+		windows.toggle_maximize_handler,
+		{ description = "Maximize", group = "Windows" }
+	),
+	map_handler(
+		mappings.client_float, --
+		windows.toggle_floating_handler,
+		{ description = "Make floating", group = "Windows" }
+	)
 )
 
-return clientKeys
+return client_keys
