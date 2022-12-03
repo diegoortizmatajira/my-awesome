@@ -16,7 +16,7 @@ local Bluetooth = require('widget.bluetooth')
 local Power = require('widget.power')
 local Systray = require('widget.systray')
 local clickable_container = require('widget.material.clickable-container')
-local mat_colors = require('theme.mat-colors')
+local mat_colors = require('utils.mat-colors')
 local dpi = require('beautiful').xresources.apply_dpi
 
 -- Create an imagebox widget which will contains an icon indicating which layout we're using.
