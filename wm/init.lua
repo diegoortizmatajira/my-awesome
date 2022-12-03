@@ -71,31 +71,8 @@ tag.connect_signal("property::selected", tagCallback)
 
 tag.connect_signal("property::layout", tagCallback)
 
-tag.connect_signal("property::selected", function(_)
-	ui.updateBarsVisibility()
-end)
-
-
-client.connect_signal("property::fullscreen", function(c)
-	c.screen.selected_tag.fullscreenMode = c.fullscreen
-	ui.updateBarsVisibility()
-end)
-
-client.connect_signal("unmanage", function(c)
-	if c.fullscreen then
-		c.screen.selected_tag.fullscreenMode = false
-		ui.updateBarsVisibility()
-	end
-end)
-
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", clientCallback)
-
-client.connect_signal("manage", windows.manage_signal_handler)
-
-client.connect_signal("focus", windows.focus_signal_handler)
-
-client.connect_signal("unfocus", windows.unfocus_signal_handler)
 
 client.connect_signal("unmanage", clientCallback)
 

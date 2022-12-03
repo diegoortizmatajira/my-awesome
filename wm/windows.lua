@@ -98,7 +98,13 @@ local function renderClient(client, mode)
 	end
 end
 
-local function setup() end
+local function setup()
+	client.connect_signal("manage", manage_signal_handler)
+	client.connect_signal("focus", focus_signal_handler)
+	client.connect_signal("unfocus", unfocus_signal_handler)
+end
+
+setup()
 
 return {
 	focus_left_handler = focus_by_direction_handler("left"),
@@ -120,5 +126,4 @@ return {
 	focus_signal_handler = focus_signal_handler,
 	unfocus_signal_handler = unfocus_signal_handler,
 	renderClient = renderClient,
-	setup = setup,
 }

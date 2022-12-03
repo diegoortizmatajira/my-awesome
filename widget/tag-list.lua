@@ -1,6 +1,6 @@
 local awful = require('awful')
 local wibox = require('wibox')
-local modkey = require('configuration.keys.mod').modKey
+local modkey = require('utils.input').metaKey
 local font_icons = require('widget.font-icons')
 local gears = require('gears')
 

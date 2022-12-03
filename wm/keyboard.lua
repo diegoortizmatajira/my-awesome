@@ -264,6 +264,4 @@ local function setup()
 	state.set_client_keys(client_keys)
 end
 
-return {
-	setup = setup,
-}
+setup()

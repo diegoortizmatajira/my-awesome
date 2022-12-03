@@ -1,6 +1,5 @@
 local awful = require("awful")
 local top_panel = require("wm.ui.top-panel")
-local state = require("wm.state")
 local apps = require("utils.apps")
 
 -- Hide bars when app go fullscreen
@@ -20,9 +19,26 @@ local function setup()
 		s.top_panel = top_panel(s)
 	end)
 	apps.spawn_wallpaper()
+
+	tag.connect_signal("property::selected", function(_)
+		updateBarsVisibility()
+	end)
+
+	client.connect_signal("property::fullscreen", function(c)
+		c.screen.selected_tag.fullscreenMode = c.fullscreen
+		updateBarsVisibility()
+	end)
+
+	client.connect_signal("unmanage", function(c)
+		if c.fullscreen then
+			c.screen.selected_tag.fullscreenMode = false
+			updateBarsVisibility()
+		end
+	end)
 end
+
+setup()
 
 return {
 	updateBarsVisibility = updateBarsVisibility,
-	setup = setup,
 }
