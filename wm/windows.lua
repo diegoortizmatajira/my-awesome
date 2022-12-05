@@ -2,7 +2,6 @@ local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local window_rules = require("settings.window-rules")
-local state = require("wm.state")
 
 local function focus_by_direction_handler(direction)
 	return function()
@@ -167,7 +166,6 @@ local function setup()
 	end)
 	tag.connect_signal("property::selected", tagCallback)
 	tag.connect_signal("property::layout", tagCallback)
-	awful.rules.rules = window_rules.build(state.get_client_keys(), state.get_client_buttons())
 end
 
 setup()
