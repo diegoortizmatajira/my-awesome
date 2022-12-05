@@ -10,9 +10,7 @@ beautiful.init(default_theme)
 require("wm.ui")
 
 -- Init all modules
-require("module.notifications")
-require("module.auto-start")
-require("module.decorate-client")
+-- require("module.notifications")
 
 -- Setup all configurations
 require("wm.windows")
