@@ -59,6 +59,16 @@ local function toggle_floating_handler(c)
 	c.floating = not c.floating
 end
 
+local function get_icon(path)
+	local cairo = require("lgi").cairo
+	local s = gears.surface(path)
+	local img = cairo.ImageSurface.create(cairo.Format.ARGB32, s:get_width(), s:get_height())
+	local cr = cairo.Context(img)
+	cr:set_source_surface(s, 0, 0)
+	cr:paint()
+	return img._native
+end
+
 local function manage_signal_handler(c)
 	-- Set the windows at the slave,
 	-- i.e. put it at the end of others instead of setting it master.
@@ -72,7 +82,7 @@ local function manage_signal_handler(c)
 	end
 	-- Adds a default icon to the client if it doesn't exist'
 	if c and c.valid and not c.icon and beautiful.default_app_icon then
-		c.icon = beautiful.default_app_icon
+		c.icon = get_icon(beautiful.default_app_icon)
 	end
 end
 
